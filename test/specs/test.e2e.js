@@ -1,8 +1,8 @@
 const { expect, $ } = require('@wdio/globals')
 
-describe('My Login application', () => {
-    it('should login with valid credentials', async () => {
+describe('WebdriverIo', () => {
+    it('Should able to do login', () => {
 
-    })
+    });
 })
 
