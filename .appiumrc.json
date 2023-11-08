@@ -8,8 +8,8 @@
             "appium:platformVersion": "13",
             "appium:deviceName": "Pixel 7 Pro API 33",
             "appium:automationName": "UiAutomator2",
-            "appium:appPackage": "com.solarviewbusinessapp",
-            "appium:appActivity": "com.solarviewbusinessapp.MainActivity"
+            "appium:appPackage": "com.wdiodemoapp",
+            "appium:appActivity": "com.wdiodemoapp.MainActivity"
           },
           "keep-alive-timeout": 600,
           "local-timezone": true,
