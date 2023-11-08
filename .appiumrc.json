@@ -1,0 +1,21 @@
+{
+    "server": {
+        "address": "127.0.0.1",
+        "port": 4723,
+        "allow-cors": true,
+        "default-capabilities": {
+            "platformName": "Android",
+            "appium:platformVersion": "13",
+            "appium:deviceName": "Pixel 7 Pro API 33",
+            "appium:automationName": "UiAutomator2",
+            "appium:appPackage": "com.solarviewbusinessapp",
+            "appium:appActivity": "com.solarviewbusinessapp.MainActivity"
+          },
+          "keep-alive-timeout": 600,
+          "local-timezone": true,
+          "log-level": "info",
+          "no-perms-check": true,
+          "use-drivers": ["UiAutomator2"],
+          "use-plugins": ["images"]
+    }
+}
