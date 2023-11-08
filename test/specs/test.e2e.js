@@ -9,10 +9,5 @@ describe('My Login application', () => {
 
         await expect($('android.view.ViewGroup')).toBeExisting()
     })
-
-    it.only('should deslooger the account', async () => {
-        const button = [35,124][151,240]
-        await driver.positionClick(button, 0)
-    })
 })
 
