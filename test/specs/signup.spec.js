@@ -9,13 +9,13 @@ describe('-> Sign up', () => {
 
     after( async () => {
         await driver.pause(1000)
-        await driver.close()
     })
 
     it('Should not be able to sign in with email invalid', async () => {
         await $('~input-email').addValue('a@')
         await $('~input-password').addValue('12345678')
         await $('~input-repeat-password').addValue('12345678')
+        await $('~button-SIGN UP').click()
 
         await expect(
             $('//android.widget.TextView[@text="Please enter a valid email address"]')
@@ -26,6 +26,7 @@ describe('-> Sign up', () => {
         await $('~input-email').addValue('a@example.com')
         await $('~input-password').addValue('123456')
         await $('~input-repeat-password').addValue('12345678')
+        await $('~button-SIGN UP').click()
 
         await expect(
             $('//android.widget.TextView[@text="Please enter at least 8 characters"]')
@@ -40,6 +41,7 @@ describe('-> Sign up', () => {
         await $('~input-email').addValue('a@example.com')
         await $('~input-password').addValue('12345678')
         await $('~input-repeat-password').addValue('123456')
+        await $('~button-SIGN UP').click()
 
         await expect(
             $('//android.widget.TextView[@text="Please enter the same password"]')
@@ -50,6 +52,7 @@ describe('-> Sign up', () => {
         await $('~input-email').addValue('a@example.com')
         await $('~input-password').addValue('12345678')
         await $('~input-repeat-password').addValue('12345678')
+        await $('~button-SIGN UP').click()
 
         await expect(
             $('//android.widget.FrameLayout[@resource-id="android:id/content"]')

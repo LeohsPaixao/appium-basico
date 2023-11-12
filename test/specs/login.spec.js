@@ -5,7 +5,6 @@ describe('-> Login', () => {
 
     after( async () => {
         await driver.pause(1000)
-        await driver.execute('mobile: terminateApp, { appId:  } ')
     })
 
     it('Should not be able to login with invalid credentials', async () => {

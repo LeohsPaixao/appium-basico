@@ -20,11 +20,12 @@ exports.config = {
 
         "platformName": "Android",
         "appium:platformVersion": "13",
-        "appium:deviceName": "Pixel 7 Pro API 33",
+        "appium:deviceName": "AppiumAVD",
         "appium:automationName": "UiAutomator2",
         "appium:appPackage": "com.wdiodemoapp",
         "appium:appActivity": "com.wdiodemoapp.MainActivity",
-        'appium:noReset': true,
+        "appium:noReset": false,
+        "appium:autoLaunch": true,
         'appium:newCommandTimeout': 240,
     }],
     mochaOpts: {
