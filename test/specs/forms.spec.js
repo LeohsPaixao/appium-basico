@@ -29,4 +29,10 @@ describe('-> forms', () => {
             .click();
         await expect($('//android.widget.EditText[@text="Appium is awesome"]')).toHaveText('Appium is awesome');
     })
+
+    it('Should be able to click on the buttons', async () => {
+        await $('~button-Active').click()
+        await expect($('//*[@resource-id="android:id/parentPanel"]')).toBeExisting()
+        await $('//*[@resource-id="android:id/button1"]').click();
+    })
 })
