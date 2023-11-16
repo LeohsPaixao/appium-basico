@@ -9,8 +9,7 @@
             "appium:deviceName": "AppiumAVD",
             "appium:automationName": "UiAutomator2",
             "appium:appPackage": "com.wdiodemoapp",
-            "appium:appActivity": "com.wdiodemoapp.MainActivity",
-            "appium:disableIdLocatorAutocompletion": "true"
+            "appium:appActivity": "com.wdiodemoapp.MainActivity"
           },
           "keep-alive-timeout": 600,
           "local-timezone": true,
