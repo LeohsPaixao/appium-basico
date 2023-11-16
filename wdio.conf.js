@@ -21,6 +21,7 @@ exports.config = {
         "platformName": "Android",
         "appium:platformVersion": "13",
         "appium:deviceName": "AppiumAVD",
+        "appium:deviceOrientation": "portrait",
         "appium:automationName": "UiAutomator2",
         "appium:appPackage": "com.wdiodemoapp",
         "appium:appActivity": "com.wdiodemoapp.MainActivity",
