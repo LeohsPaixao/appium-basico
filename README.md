@@ -46,6 +46,26 @@ Obs.: Verificar a versão do node antes de rodar  ```npm Install```
  npm i -g appium@latest
 ```
 
+3. **Instalar Driver e Plugins necessários:**
+
+**Plugins:**
+
+Gestures: É responsável pelo testes de gestos como: scroll, swipe e drapNDrop.
+Images: É necessário este plugin para o Appium Inspector.
+
+```shell
+ appium plugin install --source=npm appium-gestures-plugin
+ appium plugin install images
+```
+
+**Driver:**
+
+UiAutomator2: Driver para os testes automotivos no Mobile.
+
+```shell
+ appium driver install uiautomator2
+```
+
 Após instalar o Appium globalmente na sua máquina, vá [Appium Inspector](https://github.com/appium/appium-inspector/releases/tag/v2023.11.1) e instale.
 
 ## Executando os Testes
