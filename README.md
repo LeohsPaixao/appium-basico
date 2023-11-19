@@ -111,7 +111,7 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
 ## Estrutura do Projeto
 
    ```lua
-   appium-basico/
+    appium-basico/
       |-- .github/
           |-- workflows/
       |-- app/
