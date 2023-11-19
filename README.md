@@ -32,80 +32,80 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
 
 1. **Clonar o repositório**:
 
-```bash
- git clone git@github.com:LeohsPaixao/appium-basico.git
- cd appium-basico
- npm install
-```
+   ```bash
+    git clone git@github.com:LeohsPaixao/appium-basico.git
+    cd appium-basico
+    npm install
+   ```
 
-Obs.: Verificar a versão do node antes de rodar  ```npm Install```
+    Obs.: Verificar a versão do node antes de rodar  ```npm Install```
 
 2. **Instalar Appium e Appium Inspector:**
 
-```bash
- npm i -g appium@latest
-```
+   ```bash
+    npm i -g appium@latest
+   ```
 
 3. **Instalar Driver e Plugins necessários:**
 
-**Plugins:**
+    **Plugins:**
 
-Gestures: É responsável pelo testes de gestos como: scroll, swipe e drapNDrop.
-Images: É necessário este plugin para o Appium Inspector.
+      Gestures: É responsável pelo testes de gestos como: scroll, swipe e drapNDrop.
+      Images: É necessário este plugin para o Appium Inspector.
 
-```shell
- appium plugin install --source=npm appium-gestures-plugin
- appium plugin install images
-```
+   ```shell
+    appium plugin install --source=npm appium-gestures-plugin
+    appium plugin install images
+   ```
 
-**Driver:**
+    **Driver:**
 
-UiAutomator2: Driver para os testes automotivos no Mobile.
+      UiAutomator2: Driver para os testes automotivos no Mobile.
 
-```shell
- appium driver install uiautomator2
-```
+   ```shell
+    appium driver install uiautomator2
+   ```
 
-Após instalar o Appium globalmente na sua máquina, vá [Appium Inspector](https://github.com/appium/appium-inspector/releases/tag/v2023.11.1) e instale.
+    Após instalar o Appium globalmente na sua máquina, vá [Appium Inspector](https://github.com/appium/appium-inspector/releases/tag/v2023.11.1) e instale.
 
 ## Executando os Testes
 
 1. **Iniciar o Appium Server:**
 
-    Abra um novo terminal e rode:
+    Abra um novo terminal e rode:
 
-```bash
- npm start ## Abrirá o Server do Appium na porta 4723 (default)
-```
+   ```bash
+    npm start ## Abrirá o Server do Appium na porta 4723 (default)
+   ```
 
 2. **Executar os testes:**
 
-```bash
- npm test ## Rode todos os testes
- npm test ./test/specs/nome_do_test.spec.js ## Rode um teste especifico
-```
+   ```bash
+    npm test ## Rode todos os testes
+    npm test ./test/specs/nome_do_test.spec.js ## Rode um teste especifico
+   ```
 
 ## Estrutura do Projeto
 
-```lua
-appium-basico/
-   |-- .github/
-       |-- workflows/
-   |-- app/
-       |-- apk
-   |-- test/
-   |   |-- specs/
-   |   |-- support/
-   |-- .appiumrc.json
-   |-- .nvmrc
-   |-- README.md
-   |-- package.json
-   |-- ...
-```
+   ```lua
+   appium-basico/
+      |-- .github/
+          |-- workflows/
+      |-- app/
+          |-- apk
+      |-- test/
+      |   |-- specs/
+      |   |-- support/
+      |-- .appiumrc.json
+      |-- .nvmrc
+      |-- README.md
+      |-- package.json
+      |-- ...
+   ```
 
 ## Referencias
 
-Obs.: Graças a essas referencias, este projeto se tornou possivel.
+   Obs.: Graças a essas referencias, este projeto se tornou possivel.
 
 - [WebdriverIo API](https://webdriver.io/docs/api)
 - [Appium Docs](https://appium.io/docs/en/2.1/)
