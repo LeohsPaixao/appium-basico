@@ -1,6 +1,7 @@
 # Aprendendo Appium
 
-Projeto de estudo, conhecendo, sem cursos, a capacidade e potencialidade do Framework Appium para testes Mobile.
+Projeto de estudo. 
+Conhecendo, sem cursos, a capacidade e a potencialidade do Framework Appium para testes Mobile.
 
 ## Pré-requisito
 
