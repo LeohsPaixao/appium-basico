@@ -137,4 +137,4 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
 
 ## License
 
-Este projeto está licenciado sob a [MIT](LICENSE)
+Este projeto está licenciado sob a [Licença MIT](LICENSE).
