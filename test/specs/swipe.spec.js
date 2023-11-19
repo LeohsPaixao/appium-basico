@@ -29,7 +29,7 @@ describe('-> Swipe', () => {
 
         // Verifica se o elemento alvo está visível após o swipe
         await expect(targetElement).not.toBeDisplayed();
-})
+    })
 
     it('Should be able to swipe left', async () => {
         // Elemento alvo para verificar após o swipe
