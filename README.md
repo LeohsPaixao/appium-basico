@@ -5,10 +5,10 @@ Conhecendo, sem cursos, a capacidade e a potencialidade do Framework Appium para
 
 ## Pré-requisito
 
-- [Node.js](https://nodejs.org/)
-- [Appium Server](http://appium.io/)
+- [Node.js](https://nodejs.org/en/download/current)
+- [Appium Server](https://appium.io/docs/en/2.1/quickstart/install/)
 - [Android Studio](https://developer.android.com/studio?hl=pt-br)
-- [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-downloads.html)
+- [Java Development Kit (JDK)](https://www.oracle.com/br/java/technologies/downloads/#jdk21-windows)
 
 ### Versões
 
@@ -16,7 +16,7 @@ Conhecendo, sem cursos, a capacidade e a potencialidade do Framework Appium para
 
   - O Appium não suporta versão acima do 18, veja mais em [Requirements](https://appium.io/docs/en/2.1/intro/requirements/)
 
-- **Appium Server:** 2.2.2
+- **Appium Server:** 2.1
 
 Há dois ambientes capazes de rodar os testes Mobile, através do Emulador ou pelo Real Device:
 
