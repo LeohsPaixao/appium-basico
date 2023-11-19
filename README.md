@@ -14,9 +14,11 @@ Conhecendo, sem cursos, a capacidade e a potencialidade do Framework Appium para
 
 - **Node.js:** ^16.13.0 || >=18.0.0
 
-  - O Appium não suporta versão acima do 18, veja mais em [Requirements](https://appium.io/docs/en/2.1/intro/requirements/)
+    - O Appium não suporta versão acima do 18, veja mais em [Requirements](https://appium.io/docs/en/2.1/intro/requirements/)
 
 - **Appium Server:** 2.1
+
+- **JDK**: Instale a versão latest ou a de sua preferencia, logo após coloque JAVA_HOME em suas environment variables com o caminho do jdk instalado.
 
 Há dois ambientes capazes de rodar os testes Mobile, através do Emulador ou pelo Real Device:
 
@@ -38,7 +40,9 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
     npm install
    ```
 
-    Obs.: Rode o comando ```node -v``` para verificar se esta na versão certa do projeto antes de rodar  ```npm Install```. Se não estiver, rode o comando ```nvm use```.
+    Obs.: Rode o comando ```node -v``` para verificar se esta na versão certa do projeto antes de rodar  ```npm Install```.
+
+    **Node:** Se não estiver na versão do projeto, 18.0.0, rode o comando ```nvm use``` caso tenha o controle de versão NVM em sua máquina. Para mais detalhes, dê uma olhada em [NVM Windows](https://learn.microsoft.com/pt-br/windows/dev-environment/javascript/nodejs-on-windows).
 
 2. **Instalar Appium e Appium Inspector:**
 
@@ -60,7 +64,7 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
 
     **Driver:**
 
-      UiAutomator2: Driver para os testes automotivos no Mobile.
+      - UiAutomator2: Driver para os testes automotivos no Mobile.
 
    ```shell
     appium driver install uiautomator2
