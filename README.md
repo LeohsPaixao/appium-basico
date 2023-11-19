@@ -85,6 +85,29 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
     npm test ./test/specs/nome_do_test.spec.js ## Rode um teste especifico
    ```
 
+3. **Exemplos de código:**
+
+    ```javascript
+     // Testando se é possivel fazer login
+     describe('-> Login', () => {
+        before( async () => {
+            await $('~Login').click()
+        })
+
+        it('Should be able to complete the login', async () => {
+           await $('~input-email').addValue('a@example.com')
+           await $('~input-password').addValue('12345678')
+           await $('~button-LOGIN').click()
+
+           await expect(
+               $('//android.widget.FrameLayout[@resource-id="android:id/content"]')
+           ).toBeExisting()
+
+           await $('//android.widget.Button[@resource-id="android:id/button1"]').click()
+        })
+    })
+    ```
+
 ## Estrutura do Projeto
 
    ```lua
@@ -111,3 +134,7 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
 - [Appium Docs](https://appium.io/docs/en/2.1/)
 - [Appium Github](https://github.com/appium/appium)
 - [Appium Discuss](https://discuss.appium.io/)
+
+## License
+
+Este projeto está licenciado sob a [MIT](LICENSE)
