@@ -1,6 +1,6 @@
 # Aprendendo Appium
 
-Projeto de estudo. 
+Projeto de estudo.
 Conhecendo, sem cursos, a capacidade e a potencialidade do Framework Appium para testes Mobile.
 
 ## Pré-requisito
@@ -73,9 +73,9 @@ Após instalar o Appium globalmente na sua máquina, vá [Appium Inspector](http
 ```lua
 appium-basico/
    |-- .github/
-    |-- workflows/
+       |-- workflows/
    |-- app/
-    |-- apk
+       |-- apk
    |-- test/
    |   |-- specs/
    |   |-- support/
