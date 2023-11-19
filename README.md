@@ -6,11 +6,8 @@ Conhecendo, sem cursos, a capacidade e a potencialidade do Framework Appium para
 ## Pré-requisito
 
 - [Node.js](https://nodejs.org/)
-
 - [Appium Server](http://appium.io/)
-
 - [Android Studio](https://developer.android.com/studio?hl=pt-br)
-
 - [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-downloads.html)
 
 ### Versões
