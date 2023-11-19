@@ -1,5 +1,5 @@
 describe('-> Login', () => {
-    beforeEach( async () => {
+    before( async () => {
         await $('~Login').click()
     })
 

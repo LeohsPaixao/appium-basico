@@ -1,5 +1,5 @@
 describe('-> Forms', () => {
-    beforeEach( async () => {
+    before( async () => {
         await $('~Forms').click();
         await expect($('//android.widget.TextView[@text="Form components"]')).toBeExisting();
     })

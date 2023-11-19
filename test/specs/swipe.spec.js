@@ -1,5 +1,5 @@
 describe('-> Swipe', () => {
-    beforeEach(async () => {
+    before(async () => {
         await $('~Swipe').click();
         await expect($('//android.widget.TextView[@text="Swipe horizontal"]')).toHaveText('Swipe horizontal');
     });

@@ -1,5 +1,5 @@
 describe('-> Sign up', () => {
-    beforeEach( async () => {
+    before( async () => {
         await $('~Login').click()
         await $('//android.widget.TextView[@text="Sign up"]').click()
         await expect(

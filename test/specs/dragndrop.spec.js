@@ -1,5 +1,5 @@
 describe('-> dragNDrop', () => {
-    beforeEach(async () => {
+    before(async () => {
         await $('~Drag').click();
         await expect($('//android.widget.TextView[@text="Drag and Drop"]')).toBeDisplayed();
     });
