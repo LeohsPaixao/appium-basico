@@ -50,8 +50,8 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
 
     **Plugins:**
 
-      Gestures: É responsável pelo testes de gestos como: scroll, swipe e drapNDrop.
-      Images: É necessário este plugin para o Appium Inspector.
+      - Gestures: É responsável pelo testes de gestos como: scroll, swipe e drapNDrop.
+      - Images: É necessário este plugin para o Appium Inspector.
 
    ```shell
     appium plugin install --source=npm appium-gestures-plugin
