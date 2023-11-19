@@ -18,7 +18,7 @@ Conhecendo, sem cursos, a capacidade e a potencialidade do Framework Appium para
 
 - **Appium Server:** 2.2.2
 
-Há dois ambientes capaz de rodar os testes Mobile, através do Emulador ou pelo Real Device:
+Há dois ambientes capazes de rodar os testes Mobile, através do Emulador ou pelo Real Device:
 
 #### **Emulador**
 
