@@ -90,19 +90,24 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
     ```javascript
      // Testando se é possivel fazer login
      describe('-> Login', () => {
+        // Antes de todos os it rode os comandos abaixo
         before( async () => {
             await $('~Login').click()
         })
 
+        // Bloco de teste
         it('Should be able to complete the login', async () => {
+            // Adiciona valores nos inputs e clica no botão Login
            await $('~input-email').addValue('a@example.com')
            await $('~input-password').addValue('12345678')
            await $('~button-LOGIN').click()
 
+           // Esperasse encontrar um modal de sucesso
            await expect(
                $('//android.widget.FrameLayout[@resource-id="android:id/content"]')
            ).toBeExisting()
 
+           // Clica no botão Ok para tirar o modal de sucesso
            await $('//android.widget.Button[@resource-id="android:id/button1"]').click()
         })
     })
