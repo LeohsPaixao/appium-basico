@@ -91,6 +91,9 @@ appium-basico/
 Obs.: Graças a essas referencias, este projeto se tornou possivel.
 
 [WebdriverIo API](https://webdriver.io/docs/api)
+
 [Áppium Docs](https://appium.io/docs/en/2.1/)
+
 [Appium Github](https://github.com/appium/appium)
+
 [Appium Discuss](https://discuss.appium.io/)
