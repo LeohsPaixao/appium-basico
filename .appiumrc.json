@@ -16,6 +16,6 @@
           "log-level": "info",
           "no-perms-check": true,
           "use-drivers": ["UiAutomator2"],
-          "use-plugins": ["images"]
+          "use-plugins": ["images", "gestures"]
     }
 }

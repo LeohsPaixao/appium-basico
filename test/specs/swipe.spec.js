@@ -8,31 +8,26 @@ describe('-> Swipe', () => {
         await driver.pause(1000);
     });
 
-    it.skipe('Should be able to swipe horizontally', async () => {
+    it('Should be able to swipe left', async () => {
         // Elemento alvo para verificar após o swipe
         const targetElement = await $('//android.widget.TextView[@text="GREAT COMMUNITY"]');
+        const carousel = await $("~Carousel");
 
-        // Obtenha a posição inicial e final para o swipe
-        const startX = 0.8; // Porcentagem da largura da tela
-        const endX = 0.2; // Porcentagem da largura da tela
-        const y = 0.5; // Porcentagem da altura da tela
+        // Ensure elements are displayed
+        await expect(carousel).toBeDisplayed();
+        await expect(targetElement).not.toBeDisplayed(); // Ensure the target element is not visible initially
 
-        const { height, width } = await driver.getWindowSize();
+        // Get the element ID
+        const carouselId = carousel.elementId;
 
-        // Calcula as coordenadas reais
-        const startCoords = { x: width * startX, y: height * y };
-        const endCoords = { x: width * endX, y: height * y };
-
-        // Realiza o swipe
-        await driver.touchPerform([
-            { action: 'press', options: startCoords },
-            { action: 'wait', options: { ms: 1000 } },
-            { action: 'moveTo', options: endCoords },
-            { action: 'release', options: {} },
-        ]);
+        // Perform a left swipe on Carousel using mobile: swipe
+        await driver.executeScript('gesture: swipe', [{
+            elementId: carouselId,
+            percentage: 50,
+            direction: 'left',
+        }]);
 
         // Verifica se o elemento alvo está visível após o swipe
-        const isTargetVisible = await targetElement.isDisplayed();
-        assert.isTrue(isTargetVisible, 'O swipe horizontal falhou ou o elemento alvo não está visível após o swipe');
+        await expect(targetElement).toBeDisplayed();
     });
-})
+});
