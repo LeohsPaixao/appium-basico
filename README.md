@@ -39,6 +39,7 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
    ```
 
     Obs.: Verificar a versão do node antes de rodar  ```npm Install```
+    Rode o comando ```node -v``` para verificar se esta na versão certa do projeto, se não estiver, rode o comando ```nvm use``` que será colocado na versão 18.0.0.
 
 2. **Instalar Appium e Appium Inspector:**
 
