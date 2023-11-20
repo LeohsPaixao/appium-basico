@@ -139,6 +139,10 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
       |-- ...
    ```
 
+## Testes Reporter
+
+![Spec Reporter Tests](https://github.com/LeohsPaixao/appium-basico/assets/42840902/1b4f2fac-479f-4d25-8983-b7bfe7fba274)
+
 ## Referencias
 
    Obs.: Graças a essas referencias, este projeto se tornou possivel.
