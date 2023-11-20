@@ -3,6 +3,10 @@
 Projeto de estudo.
 Conhecendo, sem cursos, a capacidade e a potencialidade do Framework Appium para testes Mobile.
 
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node.js Version](https://img.shields.io/badge/Node.js-%3E=18.0.0-brightgreen.svg)](https://nodejs.org/)
+[![Appium Version](https://img.shields.io/badge/Appium-%3E=2.1-brightgreen.svg)](http://appium.io/)
+
 ## Pré-requisito
 
 - [Node.js](https://nodejs.org/en/download/current)
@@ -50,7 +54,7 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
     npm i -g appium@latest
    ```
 
-    Após instalar o Appium globalmente em sua máquina, caso queira utilizar o Appium Inspector para ajudar nos testes, baixe a ultima versão [aqui](https://github.com/appium/appium-inspector/releases/tag/v2023.11.1). o Appium Inspector é opcional, outra ferramenta de Inspector é o Layout Inspector do Android Studio, para saber mais sobre o Layout Inspector, acesse [aqui](https://developer.android.com/studio/debug/layout-inspector?hl=pt-br).
+    Após instalar o Appium globalmente em sua máquina, caso queira utilizar o Appium Inspector para ajudar nos testes, baixe a ultima versão [aqui](https://github.com/appium/appium-inspector/releases/tag/v2023.11.1). O Appium Inspector é opcional, outra ferramenta de Inspector é o Layout Inspector do Android Studio, para saber mais sobre o Layout Inspector, acesse [aqui](https://developer.android.com/studio/debug/layout-inspector?hl=pt-br).
 
 3. **Instalar Driver e Plugins necessários:**
 
