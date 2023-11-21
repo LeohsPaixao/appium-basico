@@ -5,22 +5,24 @@ async function dragAndDrop(driver, sourceId, destinationId) {
 async function swipeElement(driver, element, direction, percentage) {
     const elementId = element.elementId;
 
-    await driver.executeScript('gesture: swipe', [{
-        elementId,
-        percentage,
-        direction,
-    }]);
+        await driver.executeScript('gesture: swipe', [{
+            elementId,
+            percentage,
+            direction,
+        }]
+    );
 }
 
 async function scrollIntoView(driver, scrollableView, selector, strategy, percentage, direction, maxCount) {
     await driver.executeScript('gesture: scrollElementIntoView', [{
-        scrollableView,
-        selector,
-        strategy,
-        percentage,
-        direction,
-        maxCount,
-    }]);
+            scrollableView,
+            selector,
+            strategy,
+            percentage,
+            direction,
+            maxCount,
+        }]
+    );
 }
 
 async function performSwipe(driver, startX, startY, endX, endY) {
@@ -42,9 +44,31 @@ async function performSwipe(driver, startX, startY, endX, endY) {
     await driver.pause(2500);
 }
 
+async function doubleTap(driver, element) {
+    const elementId = element.elementId;
+
+        await driver.executeScript('gesture: doubleTap', [{
+            elementId
+        }]
+    );
+}
+
+async function longPress(driver, element, pressure, duration) {
+    const elementId = element.elementId;
+
+        await driver.executeScript('gesture: longPress', [{
+            elementId,
+            pressure,
+            duration,
+        }]
+    );
+}
+
 module.exports = {
     dragAndDrop,
     swipeElement,
     scrollIntoView,
     performSwipe,
+    doubleTap,
+    longPress,
 };
