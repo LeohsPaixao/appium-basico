@@ -29,6 +29,7 @@ jobs:
     - name: Install Dependencies
       run: |
         npm install
+        apt install adb
         adb kill-server || true  # Encerra o servidor ADB se estiver em execução
         adb start-server  # Inicia o servidor ADB
 
@@ -45,9 +46,6 @@ jobs:
 
     - name: Wait for Appium to Start
       run: sleep 10  # Aguarde alguns segundos para o Appium iniciar completamente
-
-    - name: Wait for Emulator to Start
-      run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 0; done'
 
     - name: Start Emulator
       uses: reactivecircus/android-emulator-runner@v2.27.0
