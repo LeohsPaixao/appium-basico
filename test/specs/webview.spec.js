@@ -1,3 +1,5 @@
+const gestures = require('../support/helpers/gestures')
+
 describe('-> Webview', () => {
     before( async () => {
         await $('~Webview').click();
@@ -16,22 +18,7 @@ describe('-> Webview', () => {
         const endY = 1500;
 
         // Realizar o swipe para cima usando performActions
-        await driver.performActions([
-            {
-                type: 'pointer',
-                id: 'finger1',
-                parameters: { pointerType: 'touch' },
-                actions: [
-                    { type: 'pointerMove', duration: 500, x: startX, y: startY },
-                    { type: 'pointerDown', button: 0 },
-                    { type: 'pointerMove', duration: 500, x: endX, y: endY },
-                    { type: 'pointerUp', button: 0 },
-                ],
-            },
-        ]);
-
-        // Garantir que a ação de swipe seja concluída antes de prosseguir
-        await driver.pause(2500);
+        await gestures.performSwipe(driver, startX, startY, endX, endY);
 
         // Pagina do Get Started
         const button_GetStarted = await $('~Get Started');
