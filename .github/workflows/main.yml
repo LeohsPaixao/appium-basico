@@ -35,10 +35,5 @@ jobs:
         chmod +x ./scripts/appium-server.sh
         ./scripts/appium-server.sh
 
-        sudo gpasswd -a $USER kvm
-
-    - name: Install Dependencies
-      run: npm install
-
-    - name: Run WebdriverIO Tests
+    - name: Run Appium Tests
       run: npm test
