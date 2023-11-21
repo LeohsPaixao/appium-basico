@@ -28,13 +28,10 @@ jobs:
         cache: 'npm'
 
     - name: Install Dependencies
-      run: npm install
-
-    - name: Install ADB
-      run: sudo apt install adb
-
-    - name: Check ADB Version
-      run: adb version
+      run: |
+        npm install
+        sudo apt install adb
+        sudo adb start-server
 
     - name: Install and Run Appium Server
       run: |
@@ -55,14 +52,3 @@ jobs:
         emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
         script: chmod +x ./scripts/appium-tests.sh
                 ./scripts/appium-tests.sh
-
-    - name: Wait for Emulator to Start
-      run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'
-
-    - name: List Devices
-      run: adb devices
-
-    - name: Run Tests Appium
-      run: |
-        chmod +x ./scripts/appium-tests.sh
-        ./scripts/appium-tests.sh
