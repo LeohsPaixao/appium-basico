@@ -2,8 +2,7 @@ name: Check User
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "lp/apredendendo-CI/CD" ]
 
 jobs:
   check_user:
