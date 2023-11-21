@@ -1,0 +1,18 @@
+name: Check User
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check_user:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Check user
+      run: |
+        whoami
