@@ -30,22 +30,15 @@ jobs:
       run: |
         npm install
         sudo apt install adb
-        sudo adb kill-server || true  # Encerra o servidor ADB se estiver em execução
         sudo adb start-server  # Inicia o servidor ADB
-
-    - name: Restart ADB Server if Needed
-      run: adb start-server
-
-    - name: Clean Emulator State
-      run: adb emu kill
 
     - name: Install and Run Appium Server
       run: |
         chmod +x ./scripts/appium-server.sh
         ./scripts/appium-server.sh &
 
-    - name: Wait for Appium to Start
-      run: sleep 10  # Aguarde alguns segundos para o Appium iniciar completamente
+    - name: Wait for Appium Server to Start
+      run: sleep 5  # Aguarde alguns segundos para o Appium iniciar completamente
 
     - name: Start Emulator
       uses: reactivecircus/android-emulator-runner@v2.27.0
@@ -61,7 +54,7 @@ jobs:
     - name: Wait for Emulator to Fully Start
       run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'
 
-    - name: Clean Emulator State Again (Optional)
+    - name: Clean Emulator State
       run: adb emu kill
 
     - name: Run Appium Tests
