@@ -1,3 +1,5 @@
+const gestures = require('../support/helpers/gestures.js')
+
 describe('-> dragNDrop', () => {
     before(async () => {
         await $('~Drag').click();
@@ -14,12 +16,7 @@ describe('-> dragNDrop', () => {
         const itemId = itemLeft2.elementId;
         const zoneId = zoneLeft1.elementId;
 
-        await driver.executeScript('gesture: dragAndDrop',
-            [{
-                sourceId: itemId,
-                destinationId: zoneId,
-            }]
-        )
+        await gestures.dragAndDrop(driver, itemId, zoneId);
 
         await expect(itemLeft2).toBeDisplayed();
         await expect(zoneLeft1).toBeDisplayed();
@@ -37,12 +34,7 @@ describe('-> dragNDrop', () => {
         const itemId = itemLeft1.elementId;
         const zoneId = zoneLeft1.elementId;
 
-        await driver.executeScript('gesture: dragAndDrop',
-            [{
-                sourceId: itemId,
-                destinationId: zoneId,
-            }]
-        )
+        await gestures.dragAndDrop(driver, itemId, zoneId);
 
         await expect(itemLeft1).not.toBeDisplayed();
         await expect(zoneLeft1).not.toBeDisplayed();
@@ -130,14 +122,10 @@ describe('-> dragNDrop', () => {
 
 
         for (let i = 0; i < getSourceItems().length; i++) {
-            await driver.executeScript('gesture: dragAndDrop',
-                [{
-                    sourceId: getSourceItems()[i],
-                    destinationId: getTargetItems()[i]
-                }]
-            )
+            await gestures.dragAndDrop(driver, getSourceItems()[i], getTargetItems()[i]);
         }
 
+        // Verify that the button "Congratulations" seems
         await expect($('//android.widget.TextView[@text="Congratulations"]')).toHaveText('Congratulations')
 
         // Retry logic
