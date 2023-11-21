@@ -49,6 +49,3 @@ jobs:
           heap-size: 1024M
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
           script: chmod +x ./scripts/appium-tests.sh && ./scripts/appium-tests.sh
-
-      - name: Clean Emulator State
-        run: adb emu kill
