@@ -17,11 +17,25 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
+        api-level: [33]
+        target: [default]
 
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Set up Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
     - name: Install and Run Appium Server
-      uses: moatazeldebsy/appium-server-gitHub-action@V1.0.4
+      run: |
+        chmod +x ./scripts/appium-server.sh
+        ./scripts/appium-server.sh
+    - name: Run Appium Tests
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: ${{ matrix.api-level }}
+        target: ${{ matrix.target }}
+        arch: x86_64
+        script: npm test
