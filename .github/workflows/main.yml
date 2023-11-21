@@ -34,7 +34,7 @@ jobs:
       run: |
         chmod +x ./scripts/appium-server.sh
         ./scripts/appium-server.sh
-
+        sudo groupadd -r kvm
         sudo gpasswd -a $USER kvm
 
     - name: Run Appium Tests
