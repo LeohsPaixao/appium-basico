@@ -16,9 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
-        api-level: [33]
-        target: [default]
+        node-version: [18]
 
     steps:
     - name: Checkout
@@ -32,7 +30,7 @@ jobs:
 
     - name: Install and Run Appium Server
       run: |
-        chmod +x ./scripts/appium-server.sh
+        chmod -R 777 ./scripts/appium-server.sh
         ./scripts/appium-server.sh
 
     - name: Run Appium Tests
