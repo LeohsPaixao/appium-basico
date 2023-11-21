@@ -33,13 +33,10 @@ jobs:
     - name: Install and Run Appium Server
       run: |
         chmod +x ./scripts/appium-server.sh
-        ./scripts/appium-server.sh
+        ./scripts/appium-server.sh &
+
+    - name: Wait for Appium to Start
+      run: sleep 5  # Aguarde alguns segundos para o Appium iniciar completamente
 
     - name: Run Appium Tests
-      uses: reactivecircus/android-emulator-runner@v2
-      with:
-        api-level: ${{ matrix.api-level }}
-        target: ${{ matrix.target }}
-        arch: x86_64
-        emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
-        script: npm test
+      run: npm test
