@@ -39,4 +39,4 @@ jobs:
       run: sleep 5  # Aguarde alguns segundos para o Appium iniciar completamente
 
     - name: Run Appium Tests
-      run: $(npm bin)/wdio run ./wdio.conf.js --spec
+      run: npx wdio run ./wdio.conf.js --spec
