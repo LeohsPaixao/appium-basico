@@ -35,6 +35,8 @@ jobs:
         chmod +x ./scripts/appium-server.sh
         ./scripts/appium-server.sh
 
+        sudo gpasswd -a $USER kvm
+
     - name: Run Appium Tests
       uses: reactivecircus/android-emulator-runner@v2
       with:
