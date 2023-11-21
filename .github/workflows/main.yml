@@ -38,10 +38,10 @@ jobs:
       run: sleep 10
 
     - name: Add new user to group NVM
-      run: sudo gpasswd -a $USER kvm
+      run: sudo gpasswd -a runner kvm
 
     - name: Run Appium Tests
-      uses: reactivecircus/android-emulator-runner@v2.27.0
+      uses: reactivecircus/android-emulator-runner@v2.28.0
       with:
         api-level: ${{ matrix.api-level }}
         target: ${{ matrix.target }}
