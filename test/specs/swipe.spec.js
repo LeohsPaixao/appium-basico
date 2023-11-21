@@ -1,3 +1,5 @@
+const gestures = require('../support/helpers/gestures.js')
+
 describe('-> Swipe', () => {
     before(async () => {
         await $('~Swipe').click();
@@ -17,15 +19,8 @@ describe('-> Swipe', () => {
         await expect(carousel).toBeDisplayed();
         await expect(targetElement).not.toBeDisplayed(); // Ensure the target element is not visible initially
 
-        // Get the element ID
-        const carouselId = carousel.elementId;
-
-        // Perform a left swipe on Carousel using mobile: swipe
-        await driver.executeScript('gesture: swipe', [{
-            elementId: carouselId,
-            percentage: 50,
-            direction: 'right',
-        }]);
+        // Perform a right swipe on Carousel
+        await gestures.swipeElement(driver, carousel, 'right', 50);
 
         // Verifica se o elemento alvo está visível após o swipe
         await expect(targetElement).not.toBeDisplayed();
@@ -40,17 +35,8 @@ describe('-> Swipe', () => {
         await expect(carousel).toBeDisplayed();
         await expect(targetElement).not.toBeDisplayed(); // Ensure the target element is not visible initially
 
-        // Get the element ID
-        const carouselId = carousel.elementId;
-
-        // Perform a left swipe on Carousel using mobile: swipe
-        await driver.executeScript('gesture: swipe',
-            [{
-                elementId: carouselId,
-                percentage: 50,
-                direction: 'left',
-            }]
-        );
+        // Perform a left swipe on Carousel
+        await gestures.swipeElement(driver, carousel, 'left', 50);
 
         // Verifica se o elemento alvo está visível após o swipe
         await expect(targetElement).toBeDisplayed();
@@ -65,16 +51,7 @@ describe('-> Swipe', () => {
 
         const screenId = screen.elementId;
 
-        await driver.executeScript('gesture: scrollElementIntoView',
-            [{
-                scrollableView: screenId,
-                strategy: "accessibility id",
-                selector: "WebdriverIO logo",
-                percentage: 50,
-                direction: 'up',
-                maxCount: 4,
-            }]
-        );
+        await gestures.scrollIntoView(driver, screenId, 'WebdriverIO logo', 'accessibility id', 50, 'up', 4);
 
         await expect(targetElement).toBeDisplayed();
     })
