@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -30,9 +29,14 @@ jobs:
     - name: Install Dependencies
       run: |
         npm install
-        sudo apt install adb
-        sudo adb kill-server
-        sudo adb start-server
+        adb kill-server || true  # Encerra o servidor ADB se estiver em execução
+        adb start-server  # Inicia o servidor ADB
+
+    - name: Restart ADB Server if Needed
+      run: adb start-server
+
+    - name: Clean Emulator State
+      run: adb emu kill
 
     - name: Install and Run Appium Server
       run: |
@@ -40,7 +44,7 @@ jobs:
         ./scripts/appium-server.sh &
 
     - name: Wait for Appium to Start
-      run: sleep 5  # Aguarde alguns segundos para o Appium iniciar completamente
+      run: sleep 10  # Aguarde alguns segundos para o Appium iniciar completamente
 
     - name: Wait for Emulator to Start
       run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'
@@ -54,5 +58,15 @@ jobs:
         ram-size: 4096M
         heap-size: 1024M
         emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
-        script: chmod +x ./scripts/appium-tests.sh
-                ./scripts/appium-tests.sh
+        script:
+
+    - name: Wait for Emulator to Fully Start
+      run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'
+
+    - name: Clean Emulator State Again (Optional)
+      run: adb emu kill
+
+    - name: Run Appium Tests
+      run: |
+        chmod +x ./scripts/appium-tests.sh
+        ./scripts/appium-tests.sh
