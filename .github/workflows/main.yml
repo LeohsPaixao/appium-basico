@@ -29,9 +29,9 @@ jobs:
     - name: Install Dependencies
       run: |
         npm install
-        apt install adb
-        adb kill-server || true  # Encerra o servidor ADB se estiver em execução
-        adb start-server  # Inicia o servidor ADB
+        sudo apt install adb
+        sudo adb kill-server || true  # Encerra o servidor ADB se estiver em execução
+        sudo adb start-server  # Inicia o servidor ADB
 
     - name: Restart ADB Server if Needed
       run: adb start-server
