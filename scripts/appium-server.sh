@@ -8,3 +8,5 @@ sudo npm install
 sudo npm install -g appium --unsafe-perm=true --allow-root
 sudo appium -v
 sudo npm start
+
+sudo gpasswd -a $USER kvm
