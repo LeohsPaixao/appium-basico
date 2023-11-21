@@ -2,9 +2,9 @@ name: Appium Run CI
 
 on:
   push:
-    branches: ["lp/aprendendo-CI/CD"]
+    branches: [ "lp/apredendendo-CI/CD" ]
   pull_request:
-    branches: ["lp/aprendendo-CI/CD"]
+    branches: [ "lp/apredendendo-CI/CD" ]
 
 jobs:
   build:
@@ -17,37 +17,54 @@ jobs:
         target: [default]
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
 
-      - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
 
-      - name: Install Dependencies
-        run: npm install
+    - name: Install Dependencies
+      run: |
+        npm install
+        adb kill-server || true  # Encerra o servidor ADB se estiver em execução
+        adb start-server  # Inicia o servidor ADB
+    - name: Restart ADB Server if Needed
+      run: adb start-server
 
-      - name: Install and Run Appium Server
-        run: |
-            chmod +x ./scripts/appium-server.sh
-            ./scripts/appium-server.sh &
+    - name: Clean Emulator State
+      run: adb emu kill
 
-      - name: Wait for Appium Server and add user to group KVM
-        run: |
-            sleep 10
-            sudo gpasswd -a $USER kvm
+    - name: Install and Run Appium Server
+      run: |
+        chmod +x ./scripts/appium-server.sh
+        ./scripts/appium-server.sh &
+    - name: Wait for Appium to Start
+      run: sleep 10  # Aguarde alguns segundos para o Appium iniciar completamente
 
-      - name: Start Emulator
-        uses: reactivecircus/android-emulator-runner@v2.28.0
-        with:
-          api-level: ${{ matrix.api-level }}
-          target: ${{ matrix.target }}
-          arch: x86_64
-          ram-size: 4096M
-          heap-size: 1024M
-          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
-          script: |
-                chmod +x ./scripts/appium-tests.sh
-                ./scripts/appium-tests.sh
+    - name: Wait for Emulator to Start
+      run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 0; done'
+
+    - name: Start Emulator
+      uses: reactivecircus/android-emulator-runner@v2.27.0
+      with:
+        api-level: ${{ matrix.api-level }}
+        target: ${{ matrix.target }}
+        arch: x86_64
+        ram-size: 4096M
+        heap-size: 1024M
+        emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+        script:
+
+    - name: Wait for Emulator to Fully Start
+      run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'
+
+    - name: Clean Emulator State Again (Optional)
+      run: adb emu kill
+
+    - name: Run Appium Tests
+      run: |
+        chmod +x ./scripts/appium-tests.sh
+        ./scripts/appium-tests.sh
