@@ -47,7 +47,7 @@ jobs:
       run: sleep 10  # Aguarde alguns segundos para o Appium iniciar completamente
 
     - name: Wait for Emulator to Start
-      run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'
+      run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 0; done'
 
     - name: Start Emulator
       uses: reactivecircus/android-emulator-runner@v2.27.0
