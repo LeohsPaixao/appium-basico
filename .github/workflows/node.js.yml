@@ -5,9 +5,9 @@ name: Appium Run CI
 
 on:
   push:
-    branches: [ "apredendendo-CI/CD" ]
+    branches: [ "lp/apredendendo-CI/CD" ]
   pull_request:
-    branches: [ "apredendendo-CI/CD" ]
+    branches: [ "lp/apredendendo-CI/CD" ]
 
 jobs:
   build:
