@@ -132,6 +132,7 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
       |-- test/
       |   |-- specs/
       |   |-- support/
+            |-- helpers/
       |-- .appiumrc.json
       |-- .nvmrc
       |-- README.md
