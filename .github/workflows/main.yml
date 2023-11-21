@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18]
+        node-version: [18.0.0]
         api-level: [33]
         target: [default]
 
