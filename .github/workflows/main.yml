@@ -40,6 +40,7 @@ jobs:
     - name: Add new user to group KVM
       run: |
         sudo usermod -aG kvm runner
+        sudo gpasswd -a $USER kvm
         sudo newgrp kvm
 
     - name: Run Appium Tests
