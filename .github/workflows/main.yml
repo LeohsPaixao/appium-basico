@@ -39,9 +39,13 @@ jobs:
 
     - name: Add new user to group KVM
       run: |
-        sudo gpasswd -a runner kvm
         sudo id $USER
         sudo grep kvm /etc/group
+        sudo cat /lib/udev/rules.d/50-udev-default.rules
+        sudo udevadm control --reload-rules
+        sudo ls -l /dev/kvm
+        sudo gpasswd -a runner kvm
+
 
     - name: Run Appium Tests
       uses: reactivecircus/android-emulator-runner@v2.28.0
