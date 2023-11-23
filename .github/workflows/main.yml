@@ -46,6 +46,9 @@ jobs:
     - name: Verify the Association Group
       run: sudo id $USER
 
+    - name: Verify the Permission Group
+      run: sudo ls -l /dev/kvm
+
     - name: Run Appium Tests
       uses: reactivecircus/android-emulator-runner@v2.28.0
       with:
