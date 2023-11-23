@@ -37,18 +37,6 @@ jobs:
     - name: Wait for Appium to Start
       run: sleep 8
 
-    - name: Add new user to group KVM
-      run: |
-        sudo usermod -aG kvm runner
-        sudo gpasswd -a $USER kvm
-        sudo newgrp kvm
-
-    - name: Verify the Association Group
-      run: sudo id $USER
-
-    - name: Verify the Permission Group
-      run: sudo ls -l /dev/kvm
-
     - name: Run Appium Tests
       uses: reactivecircus/android-emulator-runner@v2.28.0
       with:
