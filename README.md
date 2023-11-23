@@ -142,7 +142,7 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
 
 ## Testes Reporter
 
-![Spec Reporter Tests](https://github.com/LeohsPaixao/appium-basico/assets/42840902/1b4f2fac-479f-4d25-8983-b7bfe7fba274)
+![Allure Reporter Tests](https://github.com/LeohsPaixao/appium-basico/assets/42840902/34fff641-9ff1-4398-8839-35ede61df3d0)
 
 ## Referencias
 
