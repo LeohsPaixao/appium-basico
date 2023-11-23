@@ -35,10 +35,13 @@ jobs:
         ./scripts/appium-server.sh &
 
     - name: Wait for Appium to Start
-      run: sleep 10
+      run: sleep 8
 
-    - name: Add new user to group NVM
-      run: sudo gpasswd -a runner kvm
+    - name: Add new user to group KVM
+      run: |
+        sudo gpasswd -a runner kvm
+        sudo id $USER
+        sudo grep kvm /etc/group
 
     - name: Run Appium Tests
       uses: reactivecircus/android-emulator-runner@v2.28.0
