@@ -43,6 +43,9 @@ jobs:
         sudo gpasswd -a $USER kvm
         sudo newgrp kvm
 
+    - name: Verify the Association Group
+      run: sudo id $USER
+
     - name: Run Appium Tests
       uses: reactivecircus/android-emulator-runner@v2.28.0
       with:
