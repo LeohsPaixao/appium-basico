@@ -25,12 +25,13 @@ jobs:
             chmod +x ./scripts/appium-server.sh
             ./scripts/appium-server.sh &
 
-        - name: Set up Android Emulator
+        - name: Download and Extract Emulator
           run: |
-            wget -q https://dl.google.com/android/repository/emulator-linux-7306070.zip -O emulator.zip
-            unzip -q emulator.zip -d $HOME/android-sdk
-            export PATH="$HOME/android-sdk/emulator:$HOME/android-sdk/tools:$PATH"
-            emulator -version
+              curl -sL https://dl.google.com/android/repository/emulator-linux-7306070.zip -o emulator.zip
+              mkdir -p $HOME/android-sdk
+              tar -xzf emulator.zip -C $HOME/android-sdk
+              export PATH="$HOME/android-sdk/emulator:$HOME/android-sdk/tools:$PATH"
+              emulator -version
 
         - name: Start Emulator
           run: |
