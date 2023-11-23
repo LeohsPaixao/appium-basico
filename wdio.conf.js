@@ -12,7 +12,14 @@ exports.config = {
     maxInstances: 1,
     exclude: [],
     services: ['appium'],
-    reporters: ['spec'],
+    reporters: ['allure'],
+    reporterOptions: {
+        allure: {
+            outputDir: './allure-results',
+            disableWebdriverStepsReporting: true,
+            disableWebdriverScreenshotsReporting: false,
+        },
+    },
     specs: [
         './test/specs/**/*.js'
     ],
