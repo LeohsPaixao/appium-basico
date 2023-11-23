@@ -1,9 +1,6 @@
 #!/bin/bash
 set -ex
 
-echo "Put user in group KVM and run tests"
+echo "Run tests"
 
-sudo usermod -aG kvm runner
-sudo gpasswd -a $USER kvm
-sudo newgrp kvm
 sudo npm test
