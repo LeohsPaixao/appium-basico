@@ -7,45 +7,43 @@ on:
     branches: [ "lp/apredendendo-CI/CD" ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+    test:
+        runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.0.0]
-        api-level: [33]
-        target: [default]
+        steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v2
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+        - name: Set up JDK 8
+          uses: actions/setup-java@v2
+          with:
+            distribution: 'adopt'
+            java-version: '8'
 
-    - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+        - name: Install and Run Appium Server
+          run: |
+            chmod +x ./scripts/appium-server.sh
+            ./scripts/appium-server.sh &
 
-    - name: Install Dependencies
-      run: npm install
+        - name: Set up Android Emulator
+          run: |
+            wget -q https://dl.google.com/android/repository/emulator-linux-7306070.zip -O emulator.zip
+            unzip -q emulator.zip -d $HOME/android-sdk
+            export PATH="$HOME/android-sdk/emulator:$HOME/android-sdk/tools:$PATH"
+            emulator -version
 
-    - name: Install and Run Appium Server
-      run: |
-        chmod +x ./scripts/appium-server.sh
-        ./scripts/appium-server.sh &
+        - name: Start Emulator
+          run: |
+            sdkmanager --list
+            sdkmanager "system-images;android-29;google_apis;x86_64"
+            echo no | avdmanager create avd -n test -k "system-images;android-29;google_apis;x86_64"
+            emulator -avd test -no-window -no-audio -no-snapshot -no-accel -gpu swiftshader
 
-    - name: Wait for Appium to Start
-      run: sleep 8
+        - name: Install Dependencies
+          run: |
+            echo y | sdkmanager "platform-tools" "build-tools;29.0.2" "extras;google;m2repository" "extras;android;m2repository"
 
-    - name: Run Appium Tests
-      uses: reactivecircus/android-emulator-runner@v2.28.0
-      with:
-        api-level: ${{ matrix.api-level }}
-        target: ${{ matrix.target }}
-        arch: x86_64
-        ram-size: 4096M
-        heap-size: 1024M
-        emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
-        script: |
+        - name: Build and Run Appium Tests
+          run: |
             chmod +x ./scripts/appium-tests.sh
             ./scripts/appium-tests.sh
