@@ -54,6 +54,9 @@ jobs:
         export PATH=$PATH:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
         echo "export PATH=$PATH:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools" >> $HOME/.bash_profile
 
+    - name: Install Dependencies
+      run: npm install
+
     - name: Iniciar Emulador
       run: |
         echo "y" | avdmanager create avd -n test-emulator -k "system-images;android-33;google_apis;x86"
@@ -62,7 +65,6 @@ jobs:
         android-wait-for-emulator
 
         adb devices
-        npm install
         npm test
 
     - name: Verificar configurações
