@@ -3,8 +3,8 @@ set -ex
 
 echo "Android SDK Configuration"
 
-sudo apt update
-sudo apt install -y openjdk-11-jre-headless
+sudo brew update
+sudo brew install -y openjdk-11-jre-headless
 
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 export PATH=$PATH:$JAVA_HOME/bin
