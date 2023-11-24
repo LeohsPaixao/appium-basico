@@ -48,7 +48,7 @@ jobs:
       run: export GITHUB_ACTIONS=true
 
     - name: Run Appium Tests
-      uses: reactivecircus/android-emulator-runner@v2.28.0
+      uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: ${{ matrix.api-level }}
         target: ${{ matrix.target }}
