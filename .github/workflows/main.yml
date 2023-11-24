@@ -25,10 +25,10 @@ jobs:
           run: npm install
 
         - name: Configurar Android SDK
-          run: chmod +x ./scripts/android-sdk.sh
+          run: chmod +x ./scripts/android-sdk.sh && ./scripts/android-sdk.sh
 
         - name: Iniciar Appium Server
-          run: chmod +x ./scripts/appium-server.sh
+          run: chmod +x ./scripts/appium-server.sh && ./scripts/appium-server.sh
 
         - name: Espera Appium Server
           run: sleep 8
