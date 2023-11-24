@@ -55,7 +55,7 @@ jobs:
         echo "export PATH=$PATH:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools" >> $HOME/.bash_profile
 
     - name: Install Dependencies
-      run: npm install
+      run: sudo npm install
 
     - name: Iniciar Emulador
       run: |
