@@ -1,5 +1,5 @@
 node_modules
 
 # Ignorar pasta allure-results
-allure-results/
-allure-report/
+allure-results
+allure-report
