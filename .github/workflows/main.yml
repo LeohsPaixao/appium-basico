@@ -11,8 +11,12 @@ jobs:
         runs-on: macos-latest
 
         steps:
+
+        - name: Checkout
+          uses: actions/checkout@v3
+
         - name: Configurar Node.js
-          uses: actions/setup-node@v4
+          uses: actions/setup-node@v3
           with:
             node-version: '18'
             cache: 'npm'
@@ -29,10 +33,10 @@ jobs:
         - name: Espera Appium Server
           run: sleep 8
 
-        - name: export variables
+        - name: Exportar as Variaveis necessarias
           run: export GITHUB_ACTIONS=true
 
-        - name: Run Appium Tests
+        - name: Rode os testes do Appium
           uses: reactivecircus/android-emulator-runner@v2.28.0
           with:
             api-level: 33
