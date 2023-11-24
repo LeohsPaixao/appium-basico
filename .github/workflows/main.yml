@@ -7,68 +7,44 @@ on:
     branches: [ "lp/apredendendo-CI/CD" ]
 
 jobs:
-  build:
-    runs-on: macos-latest
+    appium_test:
+        runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        java-version: [11]
-        node-version: [18.0.0]
-        api-level: [33]
-        target: [default]
+        steps:
+        - name: Configurar Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: '18'
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+        - name: Configurar Android SDK
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y openjdk-8-jre-headless
+            export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+            export PATH=$PATH:$JAVA_HOME/bin
+            mkdir -p $HOME/android-sdk
+            wget -q https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip -O android-sdk.zip
+            unzip -qq android-sdk.zip -d $HOME/android-sdk
+            export ANDROID_HOME=$HOME/android-sdk
+            export ANDROID_SDK_ROOT=$HOME/android-sdk
+            export PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools
+            echo "export PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools" >> $HOME/.bashrc
 
-    - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+        - name: Aceitar Licenças do SDK
+          run: yes | sdkmanager --licenses
 
-    - name: Set up Java ${{ matrix.java-version }}
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: ${{ matrix.java-version }}
+        - name: Iniciar Appium Server
+          run: npm install -g appium && appium &
 
-    - name: Install and Run Appium Server
-      run: |
-        chmod +x ./scripts/appium-server.sh
-        ./scripts/appium-server.sh &
+        - name: Iniciar Emulador
+          run: |
+            echo "no" | avdmanager create avd -n test-emulator -k "system-images;android-30;google_apis;x86"
+            emulator -avd test-emulator -no-audio -no-window &
 
-    - name: Wait for Appium to Start
-      run: sleep 8
+            android-wait-for-emulator
 
-    - name: export variables
-      run: export GITHUB_ACTIONS=true
+        - name: Instalar dependências do projeto
+          run: npm install
 
-    - name: Configurar Android SDK
-      run: |
-        mkdir -p $HOME/android-sdk
-        wget -q https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip -O android-sdk.zip
-        unzip -qq android-sdk.zip -d $HOME/android-sdk
-        export ANDROID_HOME=$HOME/android-sdk
-        export ANDROID_SDK_ROOT=$HOME/android-sdk
-        export PATH=$PATH:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
-        echo "export PATH=$PATH:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools" >> $HOME/.bash_profile
-
-    - name: Install Dependencies
-      run: sudo npm install
-
-    - name: Iniciar Emulador
-      run: |
-        echo "y" | avdmanager create avd -n test-emulator -k "system-images;android-33;google_apis;x86"
-        emulator -avd test-emulator -no-audio -no-window &
-
-        android-wait-for-emulator
-
-        adb devices
-        npm test
-
-    - name: Verificar configurações
-      run: |
-        echo "ANDROID_HOME=${ANDROID_HOME}"
-        echo "ANDROID_SDK_ROOT=${ANDROID_SDK_ROOT}"
-        echo "JAVA_HOME=${JAVA_HOME}"
+        - name: Executar Testes Mobile
+          run: npm test
