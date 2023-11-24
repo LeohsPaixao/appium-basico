@@ -33,9 +33,6 @@ jobs:
         distribution: 'temurin'
         java-version: ${{ matrix.java-version }}
 
-    - name: Install Dependencies
-      run: npm install
-
     - name: Install and Run Appium Server
       run: |
         chmod +x ./scripts/appium-server.sh
@@ -47,14 +44,32 @@ jobs:
     - name: export variables
       run: export GITHUB_ACTIONS=true
 
-    - name: Run Appium Tests
-      uses: reactivecircus/android-emulator-runner@v2
-      with:
-        api-level: ${{ matrix.api-level }}
-        target: ${{ matrix.target }}
-        arch: x86_64
-        ram-size: 4096M
-        heap-size: 1024M
-        script: |
-          chmod +x ./scripts/appium-tests.sh
-          ./scripts/appium-tests.sh
+    - name: Configurar Android SDK
+      run: |
+        mkdir -p $HOME/android-sdk
+        wget -q https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip -O android-sdk.zip
+        unzip -qq android-sdk.zip -d $HOME/android-sdk
+        export ANDROID_HOME=$HOME/android-sdk
+        export ANDROID_SDK_ROOT=$HOME/android-sdk
+        export PATH=$PATH:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
+        echo "export PATH=$PATH:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools" >> $HOME/.bash_profile
+
+    - name: Aceitar Licenças do SDK
+      run: yes | sdkmanager --licenses
+
+    - name: Iniciar Emulador
+      run: |
+        echo "y" | avdmanager create avd -n test-emulator -k "system-images;android-33;google_apis;x86"
+        emulator -avd test-emulator -no-audio -no-window &
+
+        android-wait-for-emulator
+
+        adb devices
+        npm install
+        npm test
+
+    - name: Verificar configurações
+      run: |
+        echo "ANDROID_HOME=${ANDROID_HOME}"
+        echo "ANDROID_SDK_ROOT=${ANDROID_SDK_ROOT}"
+        echo "JAVA_HOME=${JAVA_HOME}"
