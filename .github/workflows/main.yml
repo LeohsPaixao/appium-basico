@@ -31,7 +31,7 @@ jobs:
             echo "export PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools" >> $HOME/.bashrc
 
         - name: Aceitar Licenças do SDK
-          run: yes | sdkmanager --licenses
+          run: yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --licenses
 
         - name: Iniciar Appium Server
           run: npm install -g appium && appium &
