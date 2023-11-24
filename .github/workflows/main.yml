@@ -8,43 +8,36 @@ on:
 
 jobs:
     appium_test:
-        runs-on: ubuntu-latest
+        runs-on: macos-latest
 
         steps:
         - name: Configurar Node.js
           uses: actions/setup-node@v4
           with:
             node-version: '18'
-
-        - name: Configurar Android SDK
-          run: |
-            sudo apt-get update
-            sudo apt-get install -y openjdk-8-jre-headless
-            export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-            export PATH=$PATH:$JAVA_HOME/bin
-            mkdir -p $HOME/android-sdk
-            wget -q https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip -O android-sdk.zip
-            unzip -qq android-sdk.zip -d $HOME/android-sdk
-            export ANDROID_HOME=$HOME/android-sdk
-            export ANDROID_SDK_ROOT=$HOME/android-sdk
-            export PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools
-            echo "export PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools" >> $HOME/.bashrc
-
-        - name: Aceitar Licenças do SDK
-          run: yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --licenses
-
-        - name: Iniciar Appium Server
-          run: npm install -g appium && appium &
-
-        - name: Iniciar Emulador
-          run: |
-            echo "no" | avdmanager create avd -n test-emulator -k "system-images;android-30;google_apis;x86"
-            emulator -avd test-emulator -no-audio -no-window &
-
-            android-wait-for-emulator
+            cache: 'npm'
 
         - name: Instalar dependências do projeto
           run: npm install
 
-        - name: Executar Testes Mobile
-          run: npm test
+        - name: Configurar Android SDK
+          run: chmod +x ./scripts/android-sdk.sh
+
+        - name: Iniciar Appium Server
+          run: chmod +x ./scripts/appium-server.sh
+
+        - name: Espera Appium Server
+          run: sleep 8
+
+        - name: export variables
+          run: export GITHUB_ACTIONS=true
+
+        - name: Run Appium Tests
+          uses: reactivecircus/android-emulator-runner@v2.28.0
+          with:
+            api-level: 33
+            target: default
+            arch: x86_64
+            ram-size: 4096M
+            heap-size: 1024M
+            script: npm test
