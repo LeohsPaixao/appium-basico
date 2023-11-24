@@ -54,9 +54,6 @@ jobs:
         export PATH=$PATH:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
         echo "export PATH=$PATH:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools" >> $HOME/.bash_profile
 
-    - name: Aceitar Licenças do SDK
-      run: yes | sdkmanager --licenses
-
     - name: Iniciar Emulador
       run: |
         echo "y" | avdmanager create avd -n test-emulator -k "system-images;android-33;google_apis;x86"
