@@ -1,3 +1,9 @@
+require('dotenv').config();
+
+const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
+
+const appPath = isGitHubActions ? process.env.APP_PATH_GITHUB_ACTIONS : process.env.APP_PATH;
+
 exports.config = {
     runner: 'local',
     port: 4723,
@@ -26,10 +32,11 @@ exports.config = {
     capabilities: [{
 
         "platformName": "Android",
-        "appium:platformVersion": "13",
-        "appium:deviceName": "AppiumAVD",
+        "appium:platformVersion": process.env.PLATFORM_VERSION,
+        "appium:deviceName": process.env.DEVICE_NAME,
         "appium:deviceOrientation": "portrait",
         "appium:automationName": "UiAutomator2",
+        "appium:app": appPath,
         "appium:appPackage": "com.wdiodemoapp",
         "appium:appActivity": "com.wdiodemoapp.MainActivity",
         "appium:noReset": false,
