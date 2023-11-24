@@ -21,6 +21,12 @@ jobs:
             node-version: '18.0.0'
             cache: 'npm'
 
+        - name: Configurar Java
+          uses: actions/setup-java@v3
+          with:
+            distribution: 'temurin'
+            java-version: 11
+
         - name: Instalar dependências do projeto
           run: npm install
 
