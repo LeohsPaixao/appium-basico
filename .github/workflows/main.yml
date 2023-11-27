@@ -50,7 +50,6 @@ jobs:
           with:
             api-level: 33
             target: default
-            profile: Pixel 7 Pro
             arch: x86_64
             ram-size: 9128M
             heap-size: 2048M
