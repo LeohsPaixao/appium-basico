@@ -30,12 +30,9 @@ jobs:
         - name: Instalar dependências do projeto
           run: npm install
 
-        - name: Configurar Android SDK
-          run: chmod +x ./scripts/android-sdk.sh && ./scripts/android-sdk.sh
-          shell: bash
-
-        - name: Definir Variáveis de Ambiente do Android
+        - name: Configurar Android SDK e Variáveis de Ambiente
           run: |
+            chmod +x ./scripts/android-sdk.sh && ./scripts/android-sdk.sh
             echo "export ANDROID_HOME=$RUNNER_WORKSPACE/android-sdk" >> $GITHUB_ENV
             echo "export ANDROID_SDK_ROOT=$RUNNER_WORKSPACE/android-sdk" >> $GITHUB_ENV
           shell: bash
@@ -44,12 +41,12 @@ jobs:
           run: chmod +x ./scripts/appium-server.sh && ./scripts/appium-server.sh
           shell: bash
 
-        - name: Espera Appium Server
-          run: sleep 8
-
-        - name: Exportar as Variaveis necessarias
-          run: export GITHUB_ACTIONS=true
-
+        - name: Esperar Appium Server
+          run: |
+            until nc -z localhost 4723; do
+            sleep 1
+            done
+          shell: bash
 
         - name: Rode os testes do Appium
           uses: reactivecircus/android-emulator-runner@v2.28.0

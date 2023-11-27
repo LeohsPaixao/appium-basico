@@ -13,6 +13,10 @@ export ANDROID_HOME=$RUNNER_WORKSPACE/android-sdk
 export ANDROID_SDK_ROOT=$RUNNER_WORKSPACE/android-sdk
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools
 
-echo "export PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools" >> $RUNNER_WORKSPACE/.bashrc
+# Adiciona as variáveis de ambiente ao profile para persistência
+echo "export ANDROID_HOME=$RUNNER_WORKSPACE/android-sdk" >> $RUNNER_WORKSPACE/.bash_profile
+echo "export ANDROID_SDK_ROOT=$RUNNER_WORKSPACE/android-sdk" >> $RUNNER_WORKSPACE/.bash_profile
+echo "export PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools" >> $RUNNER_WORKSPACE/.bash_profile
 
-source ~/.bashrc
+# Carrega o profile
+source $RUNNER_WORKSPACE/.bash_profile
