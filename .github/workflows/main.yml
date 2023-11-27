@@ -30,17 +30,22 @@ jobs:
         - name: Instalar dependências do projeto
           run: npm install
 
+        - name: Em qual sheel roda
+          run: chmod +x .scripts/shell.sh && ./scripts/shell.sh
+
         - name: Configurar Android SDK
           run: chmod +x ./scripts/android-sdk.sh && ./scripts/android-sdk.sh
+          shell: bash
 
         - name: Definir Variáveis de Ambiente do Android
           run: |
-            echo "export ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
-            echo "export ANDROID_SDK_ROOT=$HOME/android-sdk" >> $GITHUB_ENV
+            echo "export ANDROID_HOME=$RUNNER_WORKSPACE/android-sdk" >> $GITHUB_ENV
+            echo "export ANDROID_SDK_ROOT=$RUNNER_WORKSPACE/android-sdk" >> $GITHUB_ENV
           shell: bash
 
         - name: Iniciar Appium Server
           run: chmod +x ./scripts/appium-server.sh && ./scripts/appium-server.sh
+          shell: bash
 
         - name: Espera Appium Server
           run: sleep 8

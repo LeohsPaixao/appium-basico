@@ -13,6 +13,6 @@ export ANDROID_HOME=$RUNNER_WORKSPACE/android-sdk
 export ANDROID_SDK_ROOT=$RUNNER_WORKSPACE/android-sdk
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools
 
-echo "export PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools" >> $HOME/.bashrc
+echo "export PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools" >> $RUNNER_WORKSPACE/.bashrc
 
 source ~/.bashrc
