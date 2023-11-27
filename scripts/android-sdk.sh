@@ -4,7 +4,6 @@ set -ex
 echo "Android SDK Configuration"
 
 brew update
-brew upgrade
 
 mkdir -p $RUNNER_WORKSPACE/android-sdk
 wget -q https://dl.google.com/android/repository/commandlinetools-mac-6609375_latest.zip -O android-sdk.zip
