@@ -50,7 +50,9 @@ jobs:
           with:
             api-level: 33
             target: default
+            profile: Pixel 7 Pro
             arch: x86_64
-            ram-size: 4096M
-            heap-size: 1024M
+            ram-size: 9128M
+            heap-size: 2048M
+            disable-animations: false
             script: npm test
