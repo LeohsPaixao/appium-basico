@@ -7,7 +7,7 @@ trap 'echo "Erro na execução do script"; exit 1' ERR
 echo "Install and Running Appium Server as a Background process"
 
 # Instalar Appium globalmente usando $RUNNER_WORKSPACE
-npm install -g appium --unsafe-perm=true --allow-root --prefix $RUNNER_WORKSPACE
+npm install -g appium --unsafe-perm=true --allow-root
 
 # Verificar a versão do Appium instalado
 appium -v
