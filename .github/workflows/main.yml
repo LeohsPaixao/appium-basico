@@ -33,6 +33,12 @@ jobs:
         - name: Configurar Android SDK
           run: chmod +x ./scripts/android-sdk.sh && ./scripts/android-sdk.sh
 
+        - name: Definir Variáveis de Ambiente do Android
+          run: |
+            echo "export ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
+            echo "export ANDROID_SDK_ROOT=$HOME/android-sdk" >> $GITHUB_ENV
+          shell: bash
+
         - name: Iniciar Appium Server
           run: chmod +x ./scripts/appium-server.sh && ./scripts/appium-server.sh
 
@@ -41,6 +47,7 @@ jobs:
 
         - name: Exportar as Variaveis necessarias
           run: export GITHUB_ACTIONS=true
+
 
         - name: Rode os testes do Appium
           uses: reactivecircus/android-emulator-runner@v2.28.0
