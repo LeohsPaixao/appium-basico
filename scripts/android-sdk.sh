@@ -4,14 +4,14 @@ set -ex
 echo "Android SDK Configuration"
 
 brew update
-brew install android-sdk
+brew upgrade
 
-mkdir -p $HOME/android-sdk
+mkdir -p $RUNNER_WORKSPACE/android-sdk
 wget -q https://dl.google.com/android/repository/commandlinetools-mac-6609375_latest.zip -O android-sdk.zip
-unzip -qq android-sdk.zip -d $HOME/android-sdk
+unzip -qq android-sdk.zip -d $RUNNER_WORKSPACE/android-sdk
 
-export ANDROID_HOME=$HOME/android-sdk
-export ANDROID_SDK_ROOT=$HOME/android-sdk
+export ANDROID_HOME=$RUNNER_WORKSPACE/android-sdk
+export ANDROID_SDK_ROOT=$RUNNER_WORKSPACE/android-sdk
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools
 
 echo "export PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools" >> $HOME/.bashrc
