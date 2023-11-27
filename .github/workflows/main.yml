@@ -2,58 +2,54 @@ name: Appium Run CI
 
 on:
   push:
-    branches: [ "lp/apredendendo-CI/CD" ]
+    branches: [ "lp/aprendendo-CI/CD" ]
   pull_request:
-    branches: [ "lp/apredendendo-CI/CD" ]
+    branches: [ "lp/aprendendo-CI/CD" ]
 
 jobs:
-    appium_test:
-        runs-on: macos-latest
+  appium_test:
+    runs-on: macos-latest
 
-        steps:
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
 
-        - name: Checkout
-          uses: actions/checkout@v3
+    - name: Configurar Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.0.0'
+        cache: 'npm'
 
-        - name: Configurar Node.js
-          uses: actions/setup-node@v3
-          with:
-            node-version: '18.0.0'
-            cache: 'npm'
+    - name: Configurar Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: 18
 
-        - name: Configurar Java
-          uses: actions/setup-java@v3
-          with:
-            distribution: 'temurin'
-            java-version: 18
+    - name: Instalar dependências do projeto
+      run: npm install
 
-        - name: Instalar dependências do projeto
-          run: npm install
+    - name: Configurar Android SDK e Variáveis de Ambiente
+      run: |
+        chmod +x ./scripts/android-sdk.sh && ./scripts/android-sdk.sh
+        echo "export ANDROID_HOME=$RUNNER_WORKSPACE/android-sdk" >> $GITHUB_ENV
+        echo "export ANDROID_SDK_ROOT=$RUNNER_WORKSPACE/android-sdk" >> $GITHUB_ENV
 
-        - name: Configurar Android SDK e Variáveis de Ambiente
-          run: |
-            chmod +x ./scripts/android-sdk.sh && ./scripts/android-sdk.sh
-            echo "export ANDROID_HOME=$RUNNER_WORKSPACE/android-sdk" >> $GITHUB_ENV
-            echo "export ANDROID_SDK_ROOT=$RUNNER_WORKSPACE/android-sdk" >> $GITHUB_ENV
-          shell: bash
+    - name: Iniciar Appium Server
+      run: chmod +x ./scripts/appium-server.sh && ./scripts/appium-server.sh
 
-        - name: Iniciar Appium Server
-          run: chmod +x ./scripts/appium-server.sh && ./scripts/appium-server.sh
-          shell: bash
+    - name: Esperar Appium Server
+      run: |
+        until nc -z localhost 4723; do
+          sleep 1
+        done
 
-        - name: Esperar Appium Server
-          run: |
-            until nc -z localhost 4723; do
-            sleep 1
-            done
-          shell: bash
-
-        - name: Rode os testes do Appium
-          uses: reactivecircus/android-emulator-runner@v2.28.0
-          with:
-            api-level: 33
-            target: default
-            arch: x86_64
-            ram-size: 4096M
-            heap-size: 1024M
-            script: npm test
+    - name: Rode os testes do Appium
+      uses: reactivecircus/android-emulator-runner@v2.28.0
+      with:
+        api-level: 33
+        target: default
+        arch: x86_64
+        ram-size: 4096M
+        heap-size: 1024M
+        script: npm test
