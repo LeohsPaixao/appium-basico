@@ -36,6 +36,7 @@ exports.config = {
         "appium:deviceName": process.env.DEVICE_NAME,
         "appium:deviceOrientation": "portrait",
         "appium:automationName": "UiAutomator2",
+        "appium:disableWindowAnimation": true,
         "appium:app": appPath,
         "appium:appPackage": "com.wdiodemoapp",
         "appium:appActivity": "com.wdiodemoapp.MainActivity",
