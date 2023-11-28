@@ -3,10 +3,11 @@ require('dotenv').config();
 const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
 
 const appPath = isGitHubActions ? process.env.APP_PATH_GITHUB_ACTIONS : process.env.APP_PATH;
+const commandTimeout = isGitHubActions ? process.env.COMMAND_TIMEOUT_GITHUB : process.env.COMMAND_TIMEOUT
 
 exports.config = {
-    runner: 'local',
-    port: 4723,
+    runner: process.env.APPIUM_SERVER || 'local',
+    port: process.env.PORT || 4723,
     logLevel: 'info',
     framework: 'mocha',
     path: '/wd/hub',
@@ -36,13 +37,12 @@ exports.config = {
         "appium:deviceName": process.env.DEVICE_NAME,
         "appium:deviceOrientation": "portrait",
         "appium:automationName": "UiAutomator2",
-        "appium:disableWindowAnimation": true,
         "appium:app": appPath,
         "appium:appPackage": "com.wdiodemoapp",
         "appium:appActivity": "com.wdiodemoapp.MainActivity",
         "appium:noReset": false,
         "appium:autoLaunch": true,
-        'appium:newCommandTimeout': 240,
+        'appium:newCommandTimeout': commandTimeout,
     }],
     mochaOpts: {
         ui: 'bdd',
