@@ -6,8 +6,10 @@
   "scripts": {
     "ci": "npm ci",
     "start": "appium --config .appiumrc.json",
-    "test:demoApp": " cross-env APP_ENV=demoApp wdio run ./wdio.conf.js --spec",
-    "test:apiDemos": "cross-env APP_ENV=apiDemos wdio run ./wdio.conf.js --spec",
+    "test:all": "npm run test:demoapp && npm run test:productapp && npm run relatory",
+    "test:demoapp": "cross-env APP_ENV=demoApp wdio run ./wdio.conf.js --spec",
+    "test:productapp": "cross-env APP_ENV=apiDemos wdio run ./wdio.conf.js --spec",
+    "test:solar": "cross-env APP_ENV=solarMarket wdio run ./wdio.conf.js --spec",
     "relatory": "allure generate allure-results --clean",
     "relatory:open": "allure open"
   },
