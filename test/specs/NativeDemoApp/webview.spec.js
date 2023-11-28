@@ -1,4 +1,4 @@
-const gestures = require('../support/helpers/gestures')
+const gestures = require('../../support/helpers/gestures')
 
 describe('-> Webview', () => {
     before( async () => {
