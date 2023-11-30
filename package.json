@@ -6,7 +6,9 @@
   "scripts": {
     "ci": "npm ci",
     "start": "appium --config .appiumrc.json",
-    "test": "wdio run ./wdio.conf.js --spec",
+    "test:all": "npm run test:demoapp && npm run test:productapp && npm run relatory",
+    "test:demoapp": "cross-env APP_ENV=demoapp wdio run ./wdio.conf.js --spec",
+    "test:productapp": "cross-env APP_ENV=apidemos wdio run ./wdio.conf.js --spec",
     "relatory": "allure generate allure-results --clean",
     "relatory:open": "allure open"
   },
@@ -14,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@wdio/cli": "^8.21.0",
+    "dotenv": "^16.3.1",
     "webdriverio": "^8.21.0"
   },
   "devDependencies": {
@@ -29,6 +32,7 @@
     "appium": "^2.2.2",
     "appium-gestures-plugin": "^3.0.0",
     "appium-uiautomator2-driver": "^2.34.1",
+    "lodash": "^4.17.21",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   }

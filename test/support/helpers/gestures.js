@@ -40,7 +40,6 @@ async function performSwipe(driver, startX, startY, endX, endY) {
         },
     ]);
 
-    // Ensure that the swipe action is completed before proceeding
     await driver.pause(2500);
 }
 
