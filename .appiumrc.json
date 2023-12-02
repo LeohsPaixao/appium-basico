@@ -3,18 +3,27 @@
         "address": "127.0.0.1",
         "port": 4723,
         "allow-cors": true,
+        "keep-alive-timeout": 600,
+        "debug-log-spacing": true,
+        "local-timezone": true,
+        "tmp": "/tmp",
+        "log": "/tmp/appium.log",
+        "log-level": "info",
+        "log-no-colors": false,
+        "log-timestamp": true,
+        "long-stacktrace": false,
+        "no-perms-check": true,
+        "use-drivers": ["UiAutomator2"],
+        "use-plugins": ["images", "gestures"],
         "default-capabilities": {
             "platformName": "Android",
             "appium:platformVersion": "13",
             "appium:deviceName": "AppiumAVD",
             "appium:automationName": "UiAutomator2",
-            "appium:autoGrantPermissions": true
-          },
-          "keep-alive-timeout": 600,
-          "local-timezone": true,
-          "log-level": "info",
-          "no-perms-check": true,
-          "use-drivers": ["UiAutomator2"],
-          "use-plugins": ["images", "gestures"]
+            "appium:autoGrantPermissions": true,
+            "appium:noReset": false,
+            "appium:autoLaunch": true,
+            "appium:newCommandTimeout": 200
+        }
     }
 }
