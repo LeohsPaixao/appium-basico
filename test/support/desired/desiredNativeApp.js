@@ -11,9 +11,6 @@ const demoApp = {
             "appium:automationName": "UiAutomator2",
             "appium:appPackage": "com.wdiodemoapp",
             "appium:appActivity": "com.wdiodemoapp.MainActivity",
-            "appium:noReset": false,
-            "appium:autoLaunch": true,
-            "appium:newCommandTimeout": 240,
         },
     ],
 

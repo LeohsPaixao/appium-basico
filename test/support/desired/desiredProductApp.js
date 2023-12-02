@@ -11,9 +11,6 @@ const apiDemos = {
             "appium:app": "./apps/product_registration.apk",
             "appium:appPackage": "br.com.pztec.estoque",
             "appium:appActivity": "br.com.pztec.estoque.Inicio",
-            "appium:noReset": false,
-            "appium:autoLaunch": true,
-            "appium:newCommandTimeout": 240,
         },
     ],
 
