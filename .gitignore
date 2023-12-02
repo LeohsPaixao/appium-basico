@@ -3,3 +3,6 @@ node_modules
 # Ignorar pasta allure-results
 allure-results
 allure-report
+
+# tmp folder
+tmp
