@@ -89,9 +89,12 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
 2. **Executar os testes:**
 
    ```bash
-    npm test ## Rode todos os testes
-    npm test ./test/specs/nome_do_test.spec.js ## Rode um teste especifico
+    npm test:all ## Rode todos os testes
+    npm test:demoapp ./test/specs/nome_do_test.spec.js ## Rode um teste especifico do App DemoApp
+    npm test:apidemos ./test/specs/nome_do_test.spec.js ## Rode um teste especifico do App ProductApp
    ```
+
+   OBS.: Antes de rodar qualquer desses Scripts, certifique-se que o server esta rodando em um terminal separado.
 
 3. **Exemplos de código:**
 
@@ -132,11 +135,13 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
       |-- test/
       |   |-- specs/
       |   |-- support/
+            |-- desired/
             |-- helpers/
       |-- .appiumrc.json
       |-- .nvmrc
-      |-- README.md
       |-- package.json
+      |-- README.md
+      |-- wdio.conf.js
       |-- ...
    ```
 
