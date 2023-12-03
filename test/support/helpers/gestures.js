@@ -32,9 +32,9 @@ async function performSwipe(driver, startX, startY, endX, endY) {
             id: 'finger1',
             parameters: { pointerType: 'touch' },
             actions: [
-                { type: 'pointerMove', duration: 500, x: startX, y: startY },
+                { type: 'pointerMove', duration: 1000, x: startX, y: startY },
                 { type: 'pointerDown', button: 0 },
-                { type: 'pointerMove', duration: 500, x: endX, y: endY },
+                { type: 'pointerMove', duration: 1000, x: endX, y: endY },
                 { type: 'pointerUp', button: 0 },
             ],
         },
