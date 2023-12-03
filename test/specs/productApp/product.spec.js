@@ -1,5 +1,6 @@
 const { dateRandom } = require('./shared/dateRandom');
 const { fillProductForm } = require("./shared/fillProductForm");
+const { productGenerator } = require('./shared/productGenerator');
 
 describe("-> Product", () => {
     beforeEach(async () => {
@@ -30,9 +31,9 @@ describe("-> Product", () => {
         }
 
         await fillProductForm();
+        await $("id=br.com.pztec.estoque:id/data").click();
         await dateRandom();
 
-        await $("id=android:id/button1").click();
         await $("id=br.com.pztec.estoque:id/btn_gravar_assunto").click();
 
         await expect($("id=br.com.pztec.estoque:id/linha_parte1")).toBeDisplayed();
@@ -46,9 +47,9 @@ describe("-> Product", () => {
         }
 
         await fillProductForm();
+        await $("id=br.com.pztec.estoque:id/data").click();
         await dateRandom();
 
-        await $("id=android:id/button1").click();
         await $("id=br.com.pztec.estoque:id/btn_gravar_assunto").click();
 
         await expect($("id=br.com.pztec.estoque:id/linha_parte1")).toBeDisplayed();
@@ -63,13 +64,11 @@ describe("-> Product", () => {
         }
 
         await fillProductForm();
+        await $("id=br.com.pztec.estoque:id/data").click();
         await dateRandom();
 
-        await $("id=android:id/button1").click();
         await $("id=br.com.pztec.estoque:id/btn_gravar_assunto").click();
-
         await expect($("id=br.com.pztec.estoque:id/linha_parte1")).toBeDisplayed();
-
         await $("id=br.com.pztec.estoque:id/editar").click();
 
         const describe = await $("id=br.com.pztec.estoque:id/txt_descricao");
@@ -88,13 +87,11 @@ describe("-> Product", () => {
         }
 
         await fillProductForm();
+        await $("id=br.com.pztec.estoque:id/data").click();
         await dateRandom();
 
-        await $("id=android:id/button1").click();
         await $("id=br.com.pztec.estoque:id/btn_gravar_assunto").click();
-
         await expect($("id=br.com.pztec.estoque:id/linha_parte1")).toBeDisplayed();
-
         await $("id=br.com.pztec.estoque:id/entrada").click();
 
         await expect($("id=br.com.pztec.estoque:id/scrollView1")).toBeDisplayed();
@@ -125,9 +122,9 @@ describe("-> Product", () => {
             }
 
             await fillProductForm();
+            await $("id=br.com.pztec.estoque:id/data").click();
             await dateRandom();
 
-            await $("id=android:id/button1").click();
             await $("id=br.com.pztec.estoque:id/btn_gravar_assunto").click();
             await driver.pause(2000);
         }
