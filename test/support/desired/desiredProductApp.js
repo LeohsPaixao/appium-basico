@@ -11,6 +11,8 @@ const productApp = {
             "appium:app": "./apps/product_registration.apk",
             "appium:appPackage": "br.com.pztec.estoque",
             "appium:appActivity": "br.com.pztec.estoque.Inicio",
+            "appium:appWaitActivity": "br.com.pztec.estoque.ListaAssunto",
+            "appium:appWaitDuration": 30000,
         },
     ],
 
