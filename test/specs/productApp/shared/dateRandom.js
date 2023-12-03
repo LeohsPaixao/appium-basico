@@ -1,7 +1,6 @@
 const { randomDay } = require("../../../support/helpers/randomDay");
 
 const dateRandom = async () => {
-    await $("id=br.com.pztec.estoque:id/data").click();
     await expect($("id=android:id/parentPanel")).toBeDisplayed();
 
     await $("~Next month").click();
@@ -9,6 +8,19 @@ const dateRandom = async () => {
 
     const selector = await $$("android.view.View")[number];
     await $(selector).click();
+
+    await $("id=android:id/button1").click();
 }
 
-module.exports = { dateRandom }
+const datePrefer = async (day) => {
+    await expect($("id=android:id/parentPanel")).toBeDisplayed();
+
+    await $("~Next month").click();
+
+    const selector = await $$("android.view.View")[day];
+    await $(selector).click();
+
+    await $("id=android:id/button1").click();
+}
+
+module.exports = { dateRandom, datePrefer }
