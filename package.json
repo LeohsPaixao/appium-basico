@@ -8,7 +8,7 @@
     "start": "appium --config .appiumrc.json",
     "test:all": "npm run test:demoapp && npm run test:productapp && npm run relatory",
     "test:demoapp": "cross-env APP_ENV=demoapp wdio run ./wdio.conf.js --spec",
-    "test:productapp": "cross-env APP_ENV=apidemos wdio run ./wdio.conf.js --spec",
+    "test:productapp": "cross-env APP_ENV=productapp wdio run ./wdio.conf.js --spec",
     "relatory": "allure generate allure-results --clean",
     "relatory:open": "allure open"
   },
