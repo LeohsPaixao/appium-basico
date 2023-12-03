@@ -1,7 +1,7 @@
 const { dateRandom } = require('./shared/dateRandom');
 const { fillProductForm } = require("./shared/fillProductForm");
 
-describe("-> Produtos", () => {
+describe("-> Product", () => {
     beforeEach(async () => {
         await $("id=br.com.pztec.estoque:id/Button1").click();
     });
@@ -37,7 +37,6 @@ describe("-> Produtos", () => {
 
         await expect($("id=br.com.pztec.estoque:id/linha_parte1")).toBeDisplayed();
 
-        // Atualizar a flag hasMoreTests
         hasMoreTests = true;
     });
 
@@ -122,12 +121,10 @@ describe("-> Produtos", () => {
             const isButtonPresent = await button1.isDisplayed();
 
             if (isButtonPresent) {
-                console.log("Clicou no botão 1");
                 await button1.click();
             }
 
             await fillProductForm();
-
             await dateRandom();
 
             await $("id=android:id/button1").click();
