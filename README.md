@@ -51,7 +51,7 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
 2. **Instalar Appium e Appium Inspector:**
 
    ```bash
-    npm i -g appium@latest
+    npm i -g appium@latest --unsafe-perm=true --allow-root
    ```
 
     Após instalar o Appium globalmente em sua máquina, caso queira utilizar o Appium Inspector para ajudar nos testes, baixe a ultima versão [aqui](https://github.com/appium/appium-inspector/releases/tag/v2023.11.1). O Appium Inspector é opcional, outra ferramenta de Inspector é o Layout Inspector do Android Studio, para saber mais sobre o Layout Inspector, acesse [aqui](https://developer.android.com/studio/debug/layout-inspector?hl=pt-br).
