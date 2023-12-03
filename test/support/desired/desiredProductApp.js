@@ -1,6 +1,6 @@
 const mainConfig = require('./main');
 
-const apiDemos = {
+const productApp = {
     capabilities: [
         {
             platformName: "Android",
@@ -17,6 +17,6 @@ const apiDemos = {
     specs: ["./test/specs/productApp/*.js"],
 };
 
-const mergedConfig = { ...mainConfig, ...apiDemos };
+const mergedConfig = { ...mainConfig, ...productApp };
 
 module.exports = mergedConfig;
