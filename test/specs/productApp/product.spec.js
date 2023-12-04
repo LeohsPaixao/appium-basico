@@ -1,6 +1,5 @@
 const { dateRandom } = require('./shared/dateRandom');
 const { fillProductForm } = require("./shared/fillProductForm");
-const { productGenerator } = require('./shared/productGenerator');
 
 describe("-> Product", () => {
     beforeEach(async () => {
