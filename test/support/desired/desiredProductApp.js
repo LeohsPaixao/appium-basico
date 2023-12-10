@@ -2,7 +2,7 @@ const mainConfig = require('./main');
 
 const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
 
-const androidVersion = isGitHubActions ? '10' : '13';
+const androidVersion = isGitHubActions ? '11' : '13';
 
 const productApp = {
     capabilities: [
