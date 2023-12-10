@@ -30,7 +30,7 @@ jobs:
         - name: Instalar dependências do projeto
           run: npm install
 
-        - name: Iniciar Appium Server
+        - name: Configurar e Iniciar o Appium Server
           run: chmod +x ./scripts/appium-server.sh && ./scripts/appium-server.sh
 
         - name: Esperar Appium Server
