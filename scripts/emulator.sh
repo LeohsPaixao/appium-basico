@@ -8,8 +8,6 @@ set -x
 echo "Configuração do Emulador"
 
 # Definir o diretório AVD para evitar problemas com o caminho
-chmod -R u+w $HOME/.android/avd/
-
 export ANDROID_AVD_HOME=$HOME/.android/avd
 
 # Atualiza todos os pacotes do SDK
