@@ -45,8 +45,5 @@ jobs:
         - name: Configuração do Emulador
           run: chmod +x ./scripts/emulator.sh && ./scripts/emulator.sh
 
-        - name: Esperar pelo Emulador
-          run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'
-
         - name: Executar Testes
           run: npm test:all
