@@ -6,15 +6,11 @@ echo "Configuração do Emulador"
 # Atualiza todos os pacotes do SDK
 sdkmanager --update
 
-# Verifica o pacote da imagem do sistema
-sdkmanager --list
-
 # Instalação de pacotes adicionais (ajuste conforme necessário)
-sdkmanager --install "platforms;android-33" "build-tools;33.0.2" "extras;google;m2repository" "extras;android;m2repository" "emulator"
-
+sdkmanager --install "platforms;android-31" "build-tools;31.0.0" "extras;google;m2repository" "extras;android;m2repository" "emulator"
 
 # Criação do AVD (Android Virtual Device)
-echo "no" | avdmanager --verbose create avd --force --name test --package "system-images;android-33;google_apis_playstore;x86_64" --abi google_apis/x86_64
+echo "no" | avdmanager --verbose create avd --force --name testAVD --package "system-images;android-31;default;x86_64" --abi google_apis/x86_64
 
 # Verifica se o AVD foi criado com sucesso
 avdmanager list avd
@@ -27,4 +23,4 @@ until adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; d
     sleep 5
 done
 
-echo "Emulador configurado com sucesso!"
+echo "Emulador configurado e aberto com sucesso!"
