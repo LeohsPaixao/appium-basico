@@ -21,17 +21,14 @@ jobs:
             node-version: '18.0.0'
             cache: 'npm'
 
-        - name: Set up JDK
-          uses: actions/setup-java@v2
+        - name: Configurar Java
+          uses: actions/setup-java@v3
           with:
-              distribution: 'adopt'
-              java-version: '11'
+            distribution: 'temurin'
+            java-version: 18
 
         - name: Instalar dependências do projeto
           run: npm install
-
-        - name: Setup Android SDK
-          uses: android-actions/setup-android@v3
 
         - name: Iniciar Appium Server
           run: chmod +x ./scripts/appium-server.sh && ./scripts/appium-server.sh
@@ -41,6 +38,9 @@ jobs:
             until nc -z localhost 4723; do
             sleep 1
             done
+
+        - name: Configurar Android SDK
+          uses: android-actions/setup-android@v3
 
         - name: Configuração do Emulador
           run: chmod +x ./scripts/emulator.sh && ./scripts/emulator.sh
