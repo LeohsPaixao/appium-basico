@@ -3,7 +3,10 @@ set -ex
 
 echo "Android SDK Configuration"
 
-mkdir -p $RUNNER_WORKSPACE/android-sdk
+sudo apt update
+sudo apt install -y unzip wget openjdk-11-jdk
+
+# Instale o SDK Tools
 wget -q https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip -O android-sdk.zip
 unzip -qq android-sdk.zip -d $RUNNER_WORKSPACE/android-sdk
 
@@ -14,11 +17,8 @@ export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-
 # Configura o PATH para garantir que as ferramentas do Android estejam disponíveis
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 
-# Instalação de pacotes adicionais (ajuste conforme necessário)
-sdkmanager --install "platforms;android-33" "build-tools;33.0.0" "extras;google;m2repository" "extras;android;m2repository"
-
-# Verifica se o emulador está instalado e, se necessário, instala
-sdkmanager --install "emulator"
+# Aceitar automaticamente as licenças do SDK
+yes | sdkmanager --licenses
 
 # Adicione Logs Detalhados
 echo "Android SDK Configurado com sucesso!"
