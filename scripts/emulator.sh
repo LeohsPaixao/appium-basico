@@ -8,7 +8,6 @@ set -x
 echo "Configuração do Emulador"
 
 # Coloca no grupo KVM
-sudo groupadd -r kvm
 sudo gpasswd -a $USER kvm
 sudo gpasswd -a runner kvm
 ls -la /etc/group
