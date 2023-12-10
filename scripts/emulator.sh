@@ -28,7 +28,7 @@ else
 fi
 
 # Inicializa o emulador em segundo plano
-$ANDROID_HOME/emulator/emulator -avd testAVD -no-accel -no-window -no-audio -no-boot-anim -no-jni -camera-back none -camera-front none -selinux permissive -qemu -m 4096 &
+$ANDROID_HOME/emulator/emulator -avd AppiumAVD -no-accel -no-window -no-audio -no-boot-anim -no-jni -camera-back none -camera-front none -selinux permissive -qemu -m 4096 &
 
 echo "Aguardando a inicialização completa do emulador"
 until adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'; do
