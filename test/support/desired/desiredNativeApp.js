@@ -1,11 +1,15 @@
 // demoAppConfig.js
 const mainConfig = require('./main');
 
+const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
+
+const androidVersion = isGitHubActions ? '10' : '13';
+
 const demoApp = {
     capabilities: [
         {
             platformName: "Android",
-            "appium:platformVersion": "13",
+            "appium:platformVersion": androidVersion,
             "appium:deviceName": "AppiumAVD",
             "appium:deviceOrientation": "portrait",
             "appium:automationName": "UiAutomator2",
