@@ -3,6 +3,7 @@ const { capabilities } = require('./desiredProductApp');
 const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
 
 const connectTimeout = isGitHubActions ? 120000 : 60000
+const retryTimeout = isGitHubActions ? 200000 : 120000
 
 const main = {
     runner: "local",
@@ -13,7 +14,7 @@ const main = {
     bail: 0,
     baseUrl: "",
     waitforTimeout: connectTimeout,
-    connectionRetryTimeout: 120000,
+    connectionRetryTimeout: retryTimeout,
     connectionRetryCount: 2,
     maxInstances: 1,
     exclude: [],
