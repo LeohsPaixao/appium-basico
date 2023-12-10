@@ -4,6 +4,9 @@ const mainConfig = require('./main');
 const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
 
 const androidVersion = isGitHubActions ? '11' : '13';
+const lauchTimeout = isGitHubActions ? 60000 : 20000
+const installTimeout = isGitHubActions ? 60000 : 20000
+const adbTimeout = isGitHubActions ? 60000 : 20000
 
 const demoApp = {
     capabilities: [
@@ -16,6 +19,9 @@ const demoApp = {
             "appium:app": "./apps/Android-NativeDemoApp-0.4.0.apk",
             "appium:appPackage": "com.wdiodemoapp",
             "appium:appActivity": "com.wdiodemoapp.MainActivity",
+            "appium:uiautomator2ServerLaunchTimeout": lauchTimeout,
+            "appium:uiautomator2ServerInstallTimeout": installTimeout,
+            "appium:adbExecTimeout": adbTimeout
         },
     ],
 

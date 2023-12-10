@@ -3,6 +3,9 @@ const mainConfig = require('./main');
 const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
 
 const androidVersion = isGitHubActions ? '11' : '13';
+const lauchTimeout = isGitHubActions ? 60000 : 20000
+const installTimeout = isGitHubActions ? 60000 : 20000
+const adbTimeout = isGitHubActions ? 60000 : 20000
 
 const productApp = {
     capabilities: [
@@ -17,6 +20,9 @@ const productApp = {
             "appium:appActivity": "br.com.pztec.estoque.Inicio",
             "appium:appWaitActivity": "br.com.pztec.estoque.ListaAssunto",
             "appium:appWaitDuration": 30000,
+            "appium:uiautomator2ServerLaunchTimeout": lauchTimeout,
+            "appium:uiautomator2ServerInstallTimeout": installTimeout,
+            "appium:adbExecTimeout": adbTimeout
         },
     ],
 

@@ -1,3 +1,9 @@
+const { capabilities } = require('./desiredProductApp');
+
+const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
+
+const connectTimeout = isGitHubActions ? 120000 : 60000
+
 const main = {
     runner: "local",
     port: 4723,
@@ -6,9 +12,9 @@ const main = {
     path: "/wd/hub",
     bail: 0,
     baseUrl: "",
-    waitforTimeout: 60000,
+    waitforTimeout: connectTimeout,
     connectionRetryTimeout: 120000,
-    connectionRetryCount: 3,
+    connectionRetryCount: 2,
     maxInstances: 1,
     exclude: [],
     services: ["appium"],
