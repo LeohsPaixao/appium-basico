@@ -8,7 +8,7 @@ set -x
 echo "Configuração do Emulador"
 
 # Definir o diretório AVD para evitar problemas com o caminho
-export ANDROID_AVD_HOME=$HOME/.android/avd
+export ANDROID_AVD_HOME=$HOME/.config/.android/avd
 
 # Atualiza todos os pacotes do SDK
 sdkmanager --update
