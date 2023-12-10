@@ -17,13 +17,13 @@ jobs:
     - name: Configurar Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '14' # Ajuste para a versão do Node.js necessária
+        node-version: '18.0.0'
 
     - name: Configurar Java
       uses: actions/setup-java@v2
       with:
         distribution: 'temurin'
-        java-version: '11' # Ajuste para a versão do Java necessária
+        java-version: '18'
 
     - name: Instalar dependências do projeto
       run: npm install
