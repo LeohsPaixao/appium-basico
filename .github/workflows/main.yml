@@ -30,11 +30,8 @@ jobs:
         - name: Instalar dependências do projeto
           run: npm install
 
-        - uses: malinskiy/action-android/install-sdk@release/0.1.4
-        - run: sdkmanager platform-tools
-        - run: adb devices
-        - run: echo $ANDROID_HOME
-
+        - name: Setup Android SDK
+          uses: android-actions/setup-android@v3
 
         - name: Iniciar Appium Server
           run: chmod +x ./scripts/appium-server.sh && ./scripts/appium-server.sh
