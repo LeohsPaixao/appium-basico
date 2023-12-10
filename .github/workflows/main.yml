@@ -57,7 +57,7 @@ jobs:
           run: chmod +x ./scripts/emulator.sh && ./scripts/emulator.sh
 
         - name: Executar Testes
-          run: npm test:all
+          run: npm run test:all
 
         - name: Limpar Recursos
           run: |

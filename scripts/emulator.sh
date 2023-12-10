@@ -23,9 +23,15 @@ echo "no" | avdmanager --verbose create avd --force --name testAVD --package 'sy
 avdmanager list avd
 
 # Aguardar para a criação do Emulador
-sleep 15
+sleep 6
 
 # Inicializa o emulador em segundo plano
 $ANDROID_HOME/emulator/emulator -avd testAVD -no-window -no-audio -no-boot-anim -no-jni -camera-back none -camera-front none -selinux permissive -qemu -m 4096 &
 
 # Adicionar logs detalhados
+echo "Aguardando a inicialização completa do emulador"
+until adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'; do
+    sleep 5
+done
+
+echo "Emulador configurado e aberto com sucesso!"
