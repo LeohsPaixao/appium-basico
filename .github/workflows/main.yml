@@ -35,6 +35,7 @@ jobs:
             chmod +x ./scripts/android-sdk.sh && ./scripts/android-sdk.sh
             echo "export ANDROID_HOME=$RUNNER_WORKSPACE/android-sdk" >> $GITHUB_ENV
             echo "export ANDROID_SDK_ROOT=$RUNNER_WORKSPACE/android-sdk" >> $GITHUB_ENV
+            echo "export PATH=$PATH:$RUNNER_WORKSPACE/android-sdk/tools/bin" >> $GITHUB_ENV
 
         - name: Iniciar Appium Server
           run: chmod +x ./scripts/appium-server.sh && ./scripts/appium-server.sh
@@ -49,7 +50,7 @@ jobs:
           run: |
               echo 'y' | sdkmanager --install "system-images;android-33;google_apis;x86_64"
               echo 'no' | avdmanager --verbose create avd --force --name test --package "system-images;android-33;google_apis;x86_64" --abi google_apis/x86_64
-              emulator -avd test -no-window -no-audio -no-boot-anim -no-jni -camera-back none -camera-front none -selinux permissive -qemu -m 2048 &
+              emulator -avd test -no-window -no-audio -no-boot-anim -no-jni -camera-back none -camera-front none -selinux permissive -qemu -m 4096 &
 
         - name: Esperar pelo Emulador
           run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'
