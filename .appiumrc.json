@@ -23,7 +23,8 @@
             "appium:autoGrantPermissions": true,
             "appium:noReset": false,
             "appium:autoLaunch": true,
-            "appium:newCommandTimeout": 300
+            "appium:newCommandTimeout": 300,
+            "appium:ignoreHiddenApiPolicyError": true
         }
     }
 }
