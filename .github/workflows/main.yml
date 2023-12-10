@@ -21,21 +21,20 @@ jobs:
             node-version: '18.0.0'
             cache: 'npm'
 
-        - name: Configurar Java
-          uses: actions/setup-java@v3
+        - name: Set up JDK
+          uses: actions/setup-java@v2
           with:
-            distribution: 'temurin'
-            java-version: 18
+              distribution: 'adopt'
+              java-version: '11'
 
         - name: Instalar dependências do projeto
           run: npm install
 
-        - name: Configurar Android SDK e Variáveis de Ambiente
-          run: |
-            chmod +x ./scripts/android-sdk.sh && ./scripts/android-sdk.sh
-            echo "export ANDROID_HOME=$RUNNER_WORKSPACE/android-sdk" >> $GITHUB_ENV
-            echo "export ANDROID_SDK_ROOT=$RUNNER_WORKSPACE/android-sdk" >> $GITHUB_ENV
-            echo "export PATH=$PATH:$RUNNER_WORKSPACE/android-sdk/tools/bin" >> $GITHUB_ENV
+        - uses: malinskiy/action-android/install-sdk@release/0.1.4
+        - run: sdkmanager platform-tools
+        - run: adb devices
+        - run: echo $ANDROID_HOME
+
 
         - name: Iniciar Appium Server
           run: chmod +x ./scripts/appium-server.sh && ./scripts/appium-server.sh
