@@ -10,7 +10,7 @@ echo "Configuração do Emulador"
 # Coloca no grupo KVM
 sudo gpasswd -a $USER kvm
 sudo gpasswd -a runner kvm
-ls -la /etc/group
+sudo ls -la /etc/group
 
 # Definir o diretório AVD para evitar problemas com o caminho
 export ANDROID_AVD_HOME=$HOME/.config/.android/avd
@@ -19,10 +19,10 @@ export ANDROID_AVD_HOME=$HOME/.config/.android/avd
 sdkmanager --update
 
 # Instalação de pacotes adicionais (ajuste conforme necessário)
-sdkmanager --install "platforms;android-31" "build-tools;31.0.0" "extras;google;m2repository" "extras;android;m2repository" "system-images;android-31;google_apis;x86"
+sdkmanager --install "platforms;android-30" "build-tools;30.0.3" "extras;google;m2repository" "extras;android;m2repository" "system-images;android-30;google_apis;x86"
 
 # Criação do AVD (Android Virtual Device)
-echo "no" | avdmanager --verbose create avd --force --name testAVD --package 'system-images;android-31;google_apis;x86' --tag google_apis --abi x86
+echo "no" | avdmanager --verbose create avd --force --name testAVD --package 'system-images;android-30;google_apis;x86' --tag google_apis --abi x86
 
 # Verifica se o AVD foi criado com sucesso
 if [ -d "$ANDROID_AVD_HOME/testAVD.avd" ]; then
