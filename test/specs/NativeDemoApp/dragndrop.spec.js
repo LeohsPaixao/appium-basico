@@ -1,4 +1,4 @@
-const gestures = require('../support/helpers/gestures.js')
+const gestures = require('../../support/helpers/gestures.js')
 
 describe('-> dragNDrop', () => {
     before(async () => {

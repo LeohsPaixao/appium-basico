@@ -51,7 +51,7 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
 2. **Instalar Appium e Appium Inspector:**
 
    ```bash
-    npm i -g appium@latest
+    npm i -g appium@latest --unsafe-perm=true --allow-root
    ```
 
     Após instalar o Appium globalmente em sua máquina, caso queira utilizar o Appium Inspector para ajudar nos testes, baixe a ultima versão [aqui](https://github.com/appium/appium-inspector/releases/tag/v2023.11.1). O Appium Inspector é opcional, outra ferramenta de Inspector é o Layout Inspector do Android Studio, para saber mais sobre o Layout Inspector, acesse [aqui](https://developer.android.com/studio/debug/layout-inspector?hl=pt-br).
@@ -89,9 +89,12 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
 2. **Executar os testes:**
 
    ```bash
-    npm test ## Rode todos os testes
-    npm test ./test/specs/nome_do_test.spec.js ## Rode um teste especifico
+    npm test:all ## Rode todos os testes
+    npm test:demoapp ./test/specs/nome_do_test.spec.js ## Rode um teste especifico do App DemoApp
+    npm test:apidemos ./test/specs/nome_do_test.spec.js ## Rode um teste especifico do App ProductApp
    ```
+
+   OBS.: Antes de rodar qualquer desses Scripts, certifique-se que o server esta rodando em um terminal separado.
 
 3. **Exemplos de código:**
 
@@ -132,17 +135,19 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
       |-- test/
       |   |-- specs/
       |   |-- support/
+            |-- desired/
             |-- helpers/
       |-- .appiumrc.json
       |-- .nvmrc
-      |-- README.md
       |-- package.json
+      |-- README.md
+      |-- wdio.conf.js
       |-- ...
    ```
 
 ## Testes Reporter
 
-![Allure Reporter Tests](https://github.com/LeohsPaixao/appium-basico/assets/42840902/34fff641-9ff1-4398-8839-35ede61df3d0)
+![Allure Reporter Tests #2](https://github.com/LeohsPaixao/appium-basico/assets/42840902/5530be95-aa36-4bc1-9578-dbd904a4cd83)
 
 ## Referencias
 

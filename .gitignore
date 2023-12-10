@@ -1,5 +1,12 @@
+# ignorar node packages
 node_modules
 
-# Ignorar pasta allure-results
+# Ignorar pastas allure reporter
 allure-results
 allure-report
+
+# Ignorar pasta TMP
+tmp
+
+# Ignorar  Condiguração do VSCode User
+.vscode
