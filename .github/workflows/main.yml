@@ -7,61 +7,59 @@ on:
     branches: [ "lp/apredendendo-CI/CD" ]
 
 jobs:
-  appium_test:
-    runs-on: ubuntu-latest
+    appium_test:
+        runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+        steps:
 
-    - name: Configurar Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.0.0'
+        - name: Checkout
+          uses: actions/checkout@v3
 
-    - name: Configurar Java
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'temurin'
-        java-version: '18'
+        - name: Cachear dependencias
+          uses: actions/cache@v2
+          with:
+            path: |
+              ~/.npm
+              ~/.android
+              # Adicione outros caminhos que você deseja cache aqui
+            key: ${{ runner.os }}-node-${{ hashFiles('**/*.lock') }}
+            restore-keys: |
+              ${{ runner.os }}-node-
 
-    - name: Instalar dependências do projeto
-      run: npm install
+        - name: Configurar Node.js
+          uses: actions/setup-node@v3
+          with:
+            node-version: '18.0.0'
+            cache: 'npm'
 
-    - name: Configurar e Iniciar o Appium Server
-      run: |
-        npm install -g appium --unsafe-perm=true --allow-root
-        appium -v
-        appium --config .appiumrc.json &>/dev/null &
+        - name: Configurar Java
+          uses: actions/setup-java@v3
+          with:
+            distribution: 'temurin'
+            java-version: 18
 
-    - name: Esperar Appium Server
-      run: |
-        until nc -z localhost 4723; do
-          sleep 1
-        done
+        - name: Instalar dependências do projeto
+          run: npm install
 
-    - name: Configurar Android SDK
-      uses: android-actions/setup-android@v3
+        - name: Configurar e Iniciar o Appium Server
+          run: chmod +x ./scripts/appium-server.sh && ./scripts/appium-server.sh
 
-    - name: Configuração do Emulador
-      run: |
-        export ANDROID_AVD_HOME=$RUNNER_WORKSPACE/.android/avd
-        sdkmanager --update
-        sdkmanager --install "platforms;android-31" "build-tools;31.0.0" "extras;google;m2repository" "extras;android;m2repository" "system-images;android-31;google_apis;x86_64"
-        echo "no" | avdmanager --verbose create avd --force --name testAVD --package 'system-images;android-31;google_apis;x86_64' --tag google_apis --abi x86_64
-        avdmanager list avd
-        $ANDROID_HOME/emulator/emulator -avd testAVD -no-window -no-audio -no-boot-anim -no-jni -camera-back none -camera-front none -selinux permissive -qemu -m 4096 &
+        - name: Esperar Appium Server
+          run: |
+            until nc -z localhost 4723; do
+            sleep 1
+            done
 
-        until adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'; do
-          sleep 5
-        done
+        - name: Configurar Android SDK
+          uses: android-actions/setup-android@v3
 
-        echo "Emulador configurado com sucesso!"
+        - name: Configurar e abrir o Emulador
+          run: chmod +x ./scripts/emulator.sh && ./scripts/emulator.sh
 
-    - name: Executar Testes
-      run: npm test:all
+        - name: Executar Testes
+          run: npm test:all
 
-    - name: Limpar Recursos
-      run: |
-        pkill -f "appium --config .appiumrc.json"
-        pkill -f "$ANDROID_HOME/emulator/emulator"
+        - name: Limpar Recursos
+          run: |
+            pkill -f "appium --config .appiumrc.json"
+            pkill -f "$ANDROID_HOME/emulator/emulator"

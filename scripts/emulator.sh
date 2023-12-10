@@ -1,5 +1,9 @@
 #!/bin/bash
-set -ex
+set -e
+
+# Adicionar tratamento de erro e logs detalhados
+trap 'echo "Erro na execução do script"; exit 1' ERR
+set -x
 
 echo "Configuração do Emulador"
 
@@ -18,12 +22,10 @@ echo "no" | avdmanager --verbose create avd --force --name testAVD --package 'sy
 # Verifica se o AVD foi criado com sucesso
 avdmanager list avd
 
+# Aguardar para a criação do Emulador
+sleep 15
+
 # Inicializa o emulador em segundo plano
 $ANDROID_HOME/emulator/emulator -avd testAVD -no-window -no-audio -no-boot-anim -no-jni -camera-back none -camera-front none -selinux permissive -qemu -m 4096 &
 
-# Aguarda até que o emulador esteja completamente inicializado
-until adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'; do
-    sleep 5
-done
-
-echo "Emulador configurado com sucesso!"
+# Adicionar logs detalhados
