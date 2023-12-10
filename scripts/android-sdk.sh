@@ -17,13 +17,11 @@ export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-
 # Configura o PATH para garantir que as ferramentas do Android estejam disponíveis
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin~
 
-ls -l $RUNNER_WORKSPACE/android-sdk
-echo "ANDROID_HOME: $ANDROID_HOME"
-echo "ANDROID_SDK_ROOT: $ANDROID_SDK_ROOT"
-echo "PATH: $PATH"
-
 # Aceitar automaticamente as licenças do SDK
-yes | sdkmanager --licenses
+y | sdkmanager --licenses
 
 # Adicione Logs Detalhados
 echo "Android SDK Configurado com sucesso!"
+echo "ANDROID_HOME: $ANDROID_HOME"
+echo "ANDROID_SDK_ROOT: $ANDROID_SDK_ROOT"
+echo "PATH: $PATH"
