@@ -1,5 +1,3 @@
-const { capabilities } = require('./desiredProductApp');
-
 const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
 
 const connectTimeout = isGitHubActions ? 120000 : 60000
