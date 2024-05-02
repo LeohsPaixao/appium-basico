@@ -17,8 +17,6 @@
         "use-plugins": ["images", "gestures"],
         "default-capabilities": {
             "platformName": "Android",
-            "appium:platformVersion": "13",
-            "appium:deviceName": "AppiumAVD",
             "appium:automationName": "UiAutomator2",
             "appium:autoGrantPermissions": true,
             "appium:noReset": false,

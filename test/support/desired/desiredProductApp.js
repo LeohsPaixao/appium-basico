@@ -4,8 +4,6 @@ const productApp = {
     capabilities: [
         {
             platformName: "Android",
-            "appium:platformVersion": "13",
-            "appium:deviceName": "AppiumAVD",
             "appium:deviceOrientation": "portrait",
             "appium:automationName": "UiAutomator2",
             "appium:app": "./apps/product_registration.apk",

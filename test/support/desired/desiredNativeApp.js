@@ -5,8 +5,6 @@ const demoApp = {
     capabilities: [
         {
             platformName: "Android",
-            "appium:platformVersion": "13",
-            "appium:deviceName": "AppiumAVD",
             "appium:deviceOrientation": "portrait",
             "appium:automationName": "UiAutomator2",
             "appium:app": "./apps/Android-NativeDemoApp-0.4.0.apk",

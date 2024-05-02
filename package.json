@@ -13,7 +13,7 @@
     "relatory:open": "allure open"
   },
   "author": "Leonardo Paixão",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@wdio/cli": "^8.21.0",
     "dotenv": "^16.3.1",
