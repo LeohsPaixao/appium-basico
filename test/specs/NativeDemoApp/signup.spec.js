@@ -1,61 +1,41 @@
+const LoginElements = require('./loginAndSignup/loginElements')
+
+const elements = new LoginElements();
+
 describe('-> Sign up', () => {
     before( async () => {
-        await $('~Login').click()
-        await $('//android.widget.TextView[@text="Sign up"]').click()
-        await expect(
-            $('~input-repeat-password')
-        ).toBeExisting()
+        await elements.loginPage().click()
+        await elements.signupBar().click()
+        await expect(elements.fieldConfirmPassword()).toBeExisting()
     })
 
-    after( async () => {
-        await driver.pause(1000)
+    after(async () => await driver.pause(1000))
+
+    it('Should not be able to sign in with invalid email', async () => {
+        await elements.fillSignUpForm('a@', '12345678', '12345678');
+        await elements.btnSignup().click();
+
+        await expect(elements.messageInvalidEmail()).toHaveText('Please enter a valid email address');
     })
 
-    it('Should not be able to sign in with email invalid', async () => {
-        await $('~input-email').addValue('a@')
-        await $('~input-password').addValue('12345678')
-        await $('~input-repeat-password').addValue('12345678')
-        await $('~button-SIGN UP').click()
+    it('Should not be able to sign in with invalid password', async () => {
+        await elements.fillSignUpForm('a@example.com', '123456', '123456');
+        await elements.btnSignup().click();
 
-        await expect(
-            $('//android.widget.TextView[@text="Please enter a valid email address"]')
-        ).toHaveText('Please enter a valid email address')
+        await expect(elements.messageInvalidPassword()).toHaveText('Please enter at least 8 characters');
     })
 
-    it('Should not be able to sign in with password invalid', async () => {
-        await $('~input-email').addValue('a@example.com')
-        await $('~input-password').addValue('123456')
-        await $('~input-repeat-password').addValue('12345678')
-        await $('~button-SIGN UP').click()
+    it('Should not be able to sign in with mismatched password confirmation', async () => {
+        await elements.fillSignUpForm('a@example.com', '12345678', '123456');
+        await elements.btnSignup().click();
 
-        await expect(
-            $('//android.widget.TextView[@text="Please enter at least 8 characters"]')
-        ).toHaveText('Please enter at least 8 characters')
-
-        await expect(
-            $('//android.widget.TextView[@text="Please enter the same password"]')
-        ).toHaveText('Please enter the same password')
+        await expect(elements.messageSamePassword()).toHaveText('Please enter the same password')
     })
 
-    it('Should not be able to sign in with password confirm invalid', async () => {
-        await $('~input-email').addValue('a@example.com')
-        await $('~input-password').addValue('12345678')
-        await $('~input-repeat-password').addValue('123456')
-        await $('~button-SIGN UP').click()
+    it('Should be able to sign up successfully', async () => {
+        await elements.fillSignUpForm('a@example.com', '12345678', '12345678');
+        await elements.btnSignup().click();
 
-        await expect(
-            $('//android.widget.TextView[@text="Please enter the same password"]')
-        ).toHaveText('Please enter the same password')
-    })
-
-    it('Should be able to sign in', async () => {
-        await $('~input-email').addValue('a@example.com')
-        await $('~input-password').addValue('12345678')
-        await $('~input-repeat-password').addValue('12345678')
-        await $('~button-SIGN UP').click()
-
-        await expect(
-            $('//android.widget.FrameLayout[@resource-id="android:id/content"]')
-        ).toBeExisting()
+        await expect(elements.messageSucceeded()).toHaveText('You successfully signed up!')
     })
 })

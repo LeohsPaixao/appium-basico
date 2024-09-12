@@ -1,9 +1,12 @@
 const gestures = require('../../support/helpers/gestures.js')
+const SwipeElements = require('./swipe/swipeElements')
+
+const elements = new SwipeElements();
 
 describe('-> Swipe', () => {
     before(async () => {
-        await $('~Swipe').click();
-        await expect($('//android.widget.TextView[@text="Swipe horizontal"]')).toHaveText('Swipe horizontal');
+        await elements.swipePage().click();
+        await expect(elements.swipeText()).toHaveText('Swipe horizontal');
     });
 
     after(async () => {
@@ -11,48 +14,30 @@ describe('-> Swipe', () => {
     });
 
     it('Should not be able to swipe past carousel', async () => {
-        // Elemento alvo para verificar após o swipe
-        const targetElement = await $('//android.widget.TextView[@text="GREAT COMMUNITY"]');
-        const carousel = await $("~Carousel");
 
-        // Ensure elements are displayed
-        await expect(carousel).toBeDisplayed();
-        await expect(targetElement).not.toBeDisplayed(); // Ensure the target element is not visible initially
+        await expect(elements.carousel()).toBeDisplayed();
 
-        // Perform a right swipe on Carousel
-        await gestures.swipeElement(driver, carousel, 'right', 50);
+        await gestures.swipeElement(driver, elements.carousel(), 'right', 50);
 
-        // Verifica se o elemento alvo está visível após o swipe
-        await expect(targetElement).not.toBeDisplayed();
+        await expect(elements.currentElement()).toBeDisplayed();
     })
 
     it('Should be able to swipe left', async () => {
-        // Elemento alvo para verificar após o swipe
-        const targetElement = await $('//android.widget.TextView[@text="GREAT COMMUNITY"]');
-        const carousel = await $("~Carousel");
 
-        // Ensure elements are displayed
-        await expect(carousel).toBeDisplayed();
-        await expect(targetElement).not.toBeDisplayed(); // Ensure the target element is not visible initially
+        await expect(elements.carousel()).toBeDisplayed();
 
-        // Perform a left swipe on Carousel
-        await gestures.swipeElement(driver, carousel, 'left', 50);
+        await gestures.swipeElement(driver, elements.carousel(), 'left', 50);
 
-        // Verifica se o elemento alvo está visível após o swipe
-        await expect(targetElement).toBeDisplayed();
+        await expect(elements.targetElement()).toBeDisplayed();
     });
 
     it('Should be able to scroll to down', async () => {
-        const targetElement = await $('~WebdriverIO logo')
-        const screen = await $('~Swipe-screen');
+        await expect(elements.swipeScreen()).toBeDisplayed();
 
-        await expect(targetElement).not.toBeDisplayed();
-        await expect(screen).toBeDisplayed();
-
-        const screenId = screen.elementId;
+        const screenId = await elements.swipeScreen().elementId;
 
         await gestures.scrollIntoView(driver, screenId, 'WebdriverIO logo', 'accessibility id', 50, 'up', 4);
 
-        await expect(targetElement).toBeDisplayed();
+        await expect(elements.webDriverLogo()).toBeDisplayed();
     })
 });

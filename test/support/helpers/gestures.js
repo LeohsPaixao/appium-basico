@@ -3,7 +3,7 @@ async function dragAndDrop(driver, sourceId, destinationId) {
 }
 
 async function swipeElement(driver, element, direction, percentage) {
-    const elementId = element.elementId;
+    const elementId = await element.elementId;
 
         await driver.executeScript('gesture: swipe', [{
             elementId,
@@ -44,7 +44,7 @@ async function performSwipe(driver, startX, startY, endX, endY) {
 }
 
 async function doubleTap(driver, element) {
-    const elementId = element.elementId;
+    const elementId = await element.elementId;
 
         await driver.executeScript('gesture: doubleTap', [{
             elementId
@@ -53,7 +53,7 @@ async function doubleTap(driver, element) {
 }
 
 async function longPress(driver, element, pressure, duration) {
-    const elementId = element.elementId;
+    const elementId = await element.elementId;
 
         await driver.executeScript('gesture: longPress', [{
             elementId,
