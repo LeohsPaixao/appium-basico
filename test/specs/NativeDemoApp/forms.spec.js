@@ -1,38 +1,45 @@
+const FormsElements = require('./forms/formsElements');
+
+const elements = new FormsElements();
+
 describe('-> Forms', () => {
-    before( async () => {
-        await $('~Forms').click();
-        await expect($('//android.widget.TextView[@text="Form components"]')).toBeExisting();
-    })
+    before(async () => {
+        await elements.formPage().click();
+        await expect(elements.formScreen()).toBeDisplayed();
+    });
 
-    after( async () => {
-        await driver.pause(1000);
-    })
+    after(async () => await driver.pause(1000));
 
-    it('Should be able to type something the first field', async () => {
-        await $('~text-input').addValue('Type something');
-        await expect($('~input-text-result')).toHaveText('Type something');
-    })
+    it('Should be able to type something in the first field', async () => {
+        await elements.inputText().addValue('Type something');
+
+        await expect(elements.inputTextResult()).toHaveText('Type something');
+    });
 
     it('Should be able to turn off the switch', async () => {
-        await expect($('~switch-text')).toHaveTextContaining('ON');
-        await $('~switch').click();
-        await expect($('~switch-text')).toHaveTextContaining('OFF');
-    })
+        await expect(elements.switchText()).toHaveText(expect.stringContaining('ON'));
 
-    it('Should be able to choose an option in dropdown', async () => {
-        await $('~Dropdown').click();
-        await expect(
-            $('//android.widget.ListView[@resource-id="com.wdiodemoapp:id/select_dialog_listview"]')
-        ).toBeExisting()
+        await elements.switch().click();
 
-        await $('//android.widget.CheckedTextView[@resource-id="android:id/text1" and @text="Appium is awesome"]')
-            .click();
-        await expect($('//android.widget.EditText[@text="Appium is awesome"]')).toHaveText('Appium is awesome');
-    })
+        await expect(elements.switchText()).toHaveText(expect.stringContaining('OFF'));
+    });
 
-    it('Should be able to click on the buttons', async () => {
-        await $('~button-Active').click()
-        await expect($('//*[@resource-id="android:id/parentPanel"]')).toBeExisting()
-        await $('//*[@resource-id="android:id/button1"]').click();
-    })
-})
+    it('Should be able to choose an option in the dropdown', async () => {
+        await elements.dropdown().click();
+
+        await expect(elements.containerOptions()).toBeDisplayed();
+
+        await elements.optionOne().click();
+
+        await expect(elements.placeholderDropdown()).toHaveText('Appium is awesome');
+    });
+
+    it('Should be able to click on the Inactive button', async () => {
+        await elements.buttonInactive().click();
+    });
+
+    it('Should be able to click on the Active button', async () => {
+        await elements.buttonActive().click();
+        await expect(elements.messageButtonClick()).toHaveText('This button is active');
+    });
+});

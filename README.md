@@ -2,6 +2,8 @@
 
 Projeto de estudo.
 Conhecendo, sem cursos, a capacidade e a potencialidade do Framework Appium para testes Mobile.
+Foi usado Appium com o WebdriverIo para fazer os testes, foi escolhido dois aplicativos, que foram adicionados no projeto
+para os testes.
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Node.js Version](https://img.shields.io/badge/Node.js-%3E=18.0.0-brightgreen.svg)](https://nodejs.org/)
@@ -16,11 +18,9 @@ Conhecendo, sem cursos, a capacidade e a potencialidade do Framework Appium para
 
 ### Versões
 
-- **Node.js:** ^16.13.0 || >=18.0.0
+- **Node.js:** 20.9.0
 
-    - O Appium não suporta versão acima do 18, veja mais em [Requirements](https://appium.io/docs/en/2.1/intro/requirements/)
-
-- **Appium Server:** 2.1
+- **Appium Server:** 2.11.3
 
 - **JDK**: Instale a versão latest ou a de sua preferencia, logo após coloque JAVA_HOME em suas environment variables com o caminho do jdk instalado.
 
@@ -54,7 +54,7 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
     npm i -g appium@latest --unsafe-perm=true --allow-root
    ```
 
-    Após instalar o Appium globalmente em sua máquina, caso queira utilizar o Appium Inspector para ajudar nos testes, baixe a ultima versão [aqui](https://github.com/appium/appium-inspector/releases/tag/v2023.11.1). O Appium Inspector é opcional, outra ferramenta de Inspector é o Layout Inspector do Android Studio, para saber mais sobre o Layout Inspector, acesse [aqui](https://developer.android.com/studio/debug/layout-inspector?hl=pt-br).
+    Após instalar o Appium globalmente em sua máquina, caso queira utilizar o Appium Inspector para ajudar nos testes, baixe a ultima versão [aqui](https://github.com/appium/appium-inspector/releases/). O Appium Inspector é opcional, outra ferramenta de Inspector é o Layout Inspector do Android Studio, para saber mais sobre o Layout Inspector, acesse [aqui](https://developer.android.com/studio/debug/layout-inspector?hl=pt-br).
 
 3. **Instalar Driver e Plugins necessários:**
 
@@ -76,7 +76,9 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
     appium driver install uiautomator2
    ```
 
-## Executando os Testes
+## Debugar e/ou adicionar novos testes
+
+É possivel levantar um server para utilizar aplicativos inspectors para facilitar a captura de elementos para os testes.
 
 1. **Iniciar o Appium Server:**
 
@@ -86,7 +88,9 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
     npm start ## Abrirá o Server do Appium na porta 4723 (default)
    ```
 
-2. **Executar os testes:**
+## Executando os Testes
+
+1. **Executar os testes:**
 
    ```bash
     npm test:all ## Rode todos os testes
@@ -96,7 +100,7 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
 
    OBS.: Antes de rodar qualquer desses Scripts, certifique-se que o server esta rodando em um terminal separado.
 
-3. **Exemplos de código:**
+2. **Exemplos de código:**
 
     ```javascript
      // Testando se é possivel fazer login
@@ -139,9 +143,10 @@ O celular que será utilizado para os testes deve esta com a Opção de Desenvol
             |-- helpers/
       |-- .appiumrc.json
       |-- .nvmrc
+      |-- .npmrc
       |-- package.json
       |-- README.md
-      |-- wdio.conf.js
+      |-- wdio.conf.ts
       |-- ...
    ```
 

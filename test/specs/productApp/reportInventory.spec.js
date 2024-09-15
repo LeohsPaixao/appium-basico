@@ -1,39 +1,35 @@
-const { pdfGenerator } = require('./shared/pdfGenerator');
+const { pdfGenerator } = require('../../support/helpers/pdfGenerator');
+const ProductElements = require('./product/productElements');
+const ReportElements = require('./report/reportElements');
+
+const elements = new ReportElements();
+const elementsProduct = new ProductElements();
 
 describe("-> Repoter - Inventory", () => {
     beforeEach(async () => {
-        await $("id=br.com.pztec.estoque:id/Button3").click();
-        await $("id=br.com.pztec.estoque:id/btn_relatorios").click();
-        await $("id=br.com.pztec.estoque:id/inventario").click();
+        await driver.terminateApp("br.com.pztec.estoque");
+        await driver.activateApp("br.com.pztec.estoque");
+        await elementsProduct.btnMenu().click();
+        await elements.btnDashboard().click();
+        await elements.btnInventory().click();
     });
 
-    let hasMoreTests = true;
-
     afterEach(async () => {
-        if (hasMoreTests) {
-            await driver.terminateApp("br.com.pztec.estoque");
-            await driver.activateApp("br.com.pztec.estoque");
-            await driver.pause(3000);
-        }
+        await driver.pause(2000);
     });
 
     it("Should be able to view the pdf of the inventory data", async () => {
         await pdfGenerator();
 
-        await $("id=br.com.pztec.estoque:id/btn_abrir").click();
-        await expect($("android.widget.TextView")).toHaveText("inventory.pdf");
-        await expect($("id=com.google.android.apps.docs:id/projector_coordinator")).toBeDisplayed();
+        await elements.btnOpenPDF().click();
+        await expect(elements.titleDocsOpened()).toHaveText('inventory.pdf');
+        await expect(elements.contentDocsOpened()).toBeDisplayed();
     });
 
     it("Should be able to send the pdf of the inventory data", async () => {
-        if (!hasMoreTests) {
-            return
-        }
-
         await pdfGenerator();
-        await $("id=br.com.pztec.estoque:id/btn_email").click();
-        await expect($("id=android:id/profile_tabhost")).toBeDisplayed();
 
-        hasMoreTests = false;
+        await elements.btnSendEmail().click();
+        await expect(elements.profileTabHost()).toBeDisplayed();
     });
 })

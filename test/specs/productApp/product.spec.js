@@ -1,139 +1,117 @@
-const { dateRandom } = require('./shared/dateRandom');
-const { fillProductForm } = require("./shared/fillProductForm");
+const { dateRandom } = require('../../support/helpers/dateRandom');
+const { fillProductForm } = require('../../support/helpers/fillProductForm');
+const { productGenerator } = require('../../support/helpers/productGenerator');
+const ProductElements = require('./product/productElements');
 
-describe("-> Product", () => {
-    beforeEach(async () => {
-        await $("id=br.com.pztec.estoque:id/Button1").click();
+const elements = new ProductElements();
+
+describe('-> Product', () => {
+    context('Existing Product', () => {
+        beforeEach(async () => {
+            await driver.terminateApp('br.com.pztec.estoque');
+            await driver.activateApp('br.com.pztec.estoque');
+            await productGenerator(1);
+        });
+
+        afterEach(async () => await driver.pause(2000));
+
+        it('Should be able to remove a product', async () => {
+            await expect(elements.tableProduct()).toBeDisplayed();
+
+            await elements.btnRemoveProduct().click();
+
+            await expect(elements.modalMessage()).toBeDisplayed();
+
+            await elements.modalBtnYes().click();
+
+            await expect(elements.tableProduct()).not.toBeDisplayed();
+        });
+
+        it('Should be able to search by ID', async () => {
+            await elements.btnSearch().click();
+            await elements.inputSearch().addValue('2');
+
+            await expect(elements.tableProduct()).toBeDisplayed();
+            await expect(elements.prodId()).toHaveText('2');
+        });
     });
 
-    let hasMoreTests = true;
+    context('New Product', () => {
+        beforeEach(async () => {
+            await driver.terminateApp('br.com.pztec.estoque');
+            await driver.activateApp('br.com.pztec.estoque');
+            await elements.btnNewProduct().waitForDisplayed();
 
-    afterEach(async () => {
-        if (hasMoreTests) {
-            await driver.terminateApp("br.com.pztec.estoque");
-            await driver.activateApp("br.com.pztec.estoque");
-            await driver.pause(2000);
-        }
-    });
+            await elements.btnNewProduct().click();
+        });
 
-    it("Should not be able to save a new product without entering the mandatory data", async () => {
-        await $("id=br.com.pztec.estoque:id/btn_gravar_assunto").click();
+        afterEach(async () => await driver.pause(2000));
 
-        await expect(
-            $(`//*[@resource-id="br.com.pztec.estoque:id/scrollView1"]/android.widget.LinearLayout`)
-        ).toBeDisplayed();
-    });
+        it('Should not be able to save a new product without entering the mandatory data', async () => {
+            await elements.btnSaveProduct().click();
 
-    it("Should be able to save a new product", async () => {
-        if (!hasMoreTests) {
-            return;
-        }
+            await expect(elements.screenNewProduct()).toBeDisplayed();
+        });
 
-        await fillProductForm();
-        await $("id=br.com.pztec.estoque:id/data").click();
-        await dateRandom();
-
-        await $("id=br.com.pztec.estoque:id/btn_gravar_assunto").click();
-
-        await expect($("id=br.com.pztec.estoque:id/linha_parte1")).toBeDisplayed();
-
-        hasMoreTests = true;
-    });
-
-    it("Should be able to remove a product", async () => {
-        if (!hasMoreTests) {
-            return;
-        }
-
-        await fillProductForm();
-        await $("id=br.com.pztec.estoque:id/data").click();
-        await dateRandom();
-
-        await $("id=br.com.pztec.estoque:id/btn_gravar_assunto").click();
-
-        await expect($("id=br.com.pztec.estoque:id/linha_parte1")).toBeDisplayed();
-
-        hasMoreTests = true;
-    });
-
-
-    it("Should be able to edit a product", async () => {
-        if (!hasMoreTests) {
-            return
-        }
-
-        await fillProductForm();
-        await $("id=br.com.pztec.estoque:id/data").click();
-        await dateRandom();
-
-        await $("id=br.com.pztec.estoque:id/btn_gravar_assunto").click();
-        await expect($("id=br.com.pztec.estoque:id/linha_parte1")).toBeDisplayed();
-        await $("id=br.com.pztec.estoque:id/editar").click();
-
-        const describe = await $("id=br.com.pztec.estoque:id/txt_descricao");
-
-        await (describe).clearValue();
-        await (describe).addValue("NEW DESCRIP");
-
-        await expect($(describe)).toHaveText("NEW DESCRIP");
-
-        hasMoreTests = true;
-    });
-
-    it("Should be able to increase the number of products", async () => {
-        if (!hasMoreTests) {
-            return
-        }
-
-        await fillProductForm();
-        await $("id=br.com.pztec.estoque:id/data").click();
-        await dateRandom();
-
-        await $("id=br.com.pztec.estoque:id/btn_gravar_assunto").click();
-        await expect($("id=br.com.pztec.estoque:id/linha_parte1")).toBeDisplayed();
-        await $("id=br.com.pztec.estoque:id/entrada").click();
-
-        await expect($("id=br.com.pztec.estoque:id/scrollView1")).toBeDisplayed();
-
-        await $("id=br.com.pztec.estoque:id/txt_qtdentrada").addValue("2");
-        await $("id=br.com.pztec.estoque:id/txt_motivo").addValue("I bought a new stock");
-        await $("id=br.com.pztec.estoque:id/txt_referencia").addValue("document");
-
-        await $("id=br.com.pztec.estoque:id/btn_salvar").click();
-
-        await expect($("id=br.com.pztec.estoque:id/txt_quantidade")).toHaveTextContaining("16");
-
-        hasMoreTests = true;
-    });
-
-    it("Should be able to search for ID", async () => {
-        if (!hasMoreTests) {
-            return;
-        }
-
-        const button1 = await $("id=br.com.pztec.estoque:id/Button1");
-
-        for (let i = 0; i < 5; i++) {
-            const isButtonPresent = await button1.isDisplayed();
-
-            if (isButtonPresent) {
-                await button1.click();
-            }
-
+        it('Should be able to save a new product', async () => {
             await fillProductForm();
-            await $("id=br.com.pztec.estoque:id/data").click();
             await dateRandom();
 
-            await $("id=br.com.pztec.estoque:id/btn_gravar_assunto").click();
-            await driver.pause(2000);
-        }
+            await elements.btnSaveProduct().click();
 
-        await $("~Search").click();
-        await $("id=android:id/search_src_text").addValue("1");
+            await expect(elements.tableProduct()).toBeDisplayed();
+        });
 
-        await expect($("id=br.com.pztec.estoque:id/linha_parte1")).toBeDisplayed();
-        await expect($("id=br.com.pztec.estoque:id/txt_idprod")).toBeDisplayed();
+        it('Should be able to edit a product', async () => {
+            await fillProductForm();
+            await dateRandom();
 
-        hasMoreTests = false;
+            await elements.btnSaveProduct().click();
+            await expect(elements.tableProduct()).toBeDisplayed();
+            await elements.btnEditProduct().click();
+
+            await elements.inputDescription().clearValue();
+            await elements.inputDescription().addValue('NEW DESCRIPTION');
+
+            await expect(elements.inputDescription()).toHaveText('NEW DESCRIPTION');
+        });
+
+        it('Should be able to increase the number of products', async () => {
+            await fillProductForm();
+            await dateRandom();
+
+            await elements.btnSaveProduct().click();
+            await expect(elements.tableProduct()).toBeDisplayed();
+            await elements.btnIncreaseQtnProduct().click();
+
+            await expect(elements.titleScreenQtnProduct()).toHaveText('Increment stock');
+
+            await elements.inputQtnEntrance().addValue('2');
+            await elements.inputReason().addValue('I bought new stock');
+            await elements.inputRef().addValue('document');
+
+            await elements.btnSaveQtnProduct().click();
+
+            await expect(elements.inputQuantity()).toHaveText(expect.stringContaining('16'));
+        });
+
+        it('Should be able to decrease the number of products', async () => {
+            await fillProductForm();
+            await dateRandom();
+
+            await elements.btnSaveProduct().click();
+            await expect(elements.tableProduct()).toBeDisplayed();
+            await elements.btnDecreaseQtnProduct().click();
+
+            await expect(elements.titleScreenQtnProduct()).toHaveText('Decrease stock');
+
+            await elements.inputQtnOut().addValue('2');
+            await elements.inputReason().addValue('I sold stock');
+            await elements.inputRef().addValue('document');
+
+            await elements.btnSaveQtnProduct().click();
+
+            await expect(elements.inputQuantity()).toHaveText(expect.stringContaining('12'));
+        });
     });
 });

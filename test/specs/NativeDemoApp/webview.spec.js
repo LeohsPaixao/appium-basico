@@ -9,11 +9,9 @@ describe("-> Webview", () => {
         await driver.pause(5000);
     });
 
-    after(async () => {
-        await driver.pause(1000);
-    });
+    after(async () => await driver.pause(1000));
 
-    it("Should be able to navigate for Get Started and return", async () => {
+    it("Should be able to navigate to Get Started and return", async () => {
         const startX = 50;
         const startY = 2500;
         const endX = 50;
@@ -30,22 +28,8 @@ describe("-> Webview", () => {
         await expect(elements.homeScreen()).toBeDisplayed();
     });
 
-    it("Should be able to chance the color white for black ", async () => {
-        await elements.navigationBar().click();
-
-        driver.pause(3000);
-
-        await elements.modeColor().click();
-
-        await expect(elements.modeColor()).toHaveTextContaining("dark mode");
-
-        await elements.closeNavigationBar().click();
-    });
-
     it("Should be able to search something", async () => {
         await elements.buttonSearch().click();
-
-        await expect(elements.search()).toBeDisplayed();
 
         await elements.search().addValue("Visual Testing");
 

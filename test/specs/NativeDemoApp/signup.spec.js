@@ -36,6 +36,6 @@ describe('-> Sign up', () => {
         await elements.fillSignUpForm('a@example.com', '12345678', '12345678');
         await elements.btnSignup().click();
 
-        await expect(elements.messageSucceeded()).toHaveText('You successfully signed up!')
+        await expect(elements.messageSignupSucceeded()).toHaveText('You successfully signed up!')
     })
 })

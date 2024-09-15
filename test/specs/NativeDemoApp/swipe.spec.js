@@ -9,9 +9,7 @@ describe('-> Swipe', () => {
         await expect(elements.swipeText()).toHaveText('Swipe horizontal');
     });
 
-    after(async () => {
-        await driver.pause(1000);
-    });
+    after(async () => await driver.pause(1000));
 
     it('Should not be able to swipe past carousel', async () => {
 
@@ -20,7 +18,7 @@ describe('-> Swipe', () => {
         await gestures.swipeElement(driver, elements.carousel(), 'right', 50);
 
         await expect(elements.currentElement()).toBeDisplayed();
-    })
+    });
 
     it('Should be able to swipe left', async () => {
 
@@ -31,7 +29,7 @@ describe('-> Swipe', () => {
         await expect(elements.targetElement()).toBeDisplayed();
     });
 
-    it('Should be able to scroll to down', async () => {
+    it('Should be able to scroll down', async () => {
         await expect(elements.swipeScreen()).toBeDisplayed();
 
         const screenId = await elements.swipeScreen().elementId;
@@ -39,5 +37,5 @@ describe('-> Swipe', () => {
         await gestures.scrollIntoView(driver, screenId, 'WebdriverIO logo', 'accessibility id', 50, 'up', 4);
 
         await expect(elements.webDriverLogo()).toBeDisplayed();
-    })
+    });
 });
