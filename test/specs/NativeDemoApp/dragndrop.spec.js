@@ -1,139 +1,83 @@
-const gestures = require('../../support/helpers/gestures.js')
+const gestures = require('../../support/helpers/gestures.js');
+const DraggableElements = require('./dragAnddrop/dragndropElement');
 
-describe('-> dragNDrop', () => {
+const elements = new DraggableElements();
+
+describe('-> dragndrop', () => {
     before(async () => {
-        await $('~Drag').click();
-        await expect($('//android.widget.TextView[@text="Drag and Drop"]')).toBeDisplayed();
+        await elements.dragndropPage().click();
+        await expect(elements.dragndropScreen()).toBeDisplayed();
     });
 
     it('Should not be able to drag an item and drop it in the wrong area', async () => {
-        const itemLeft2 = await $('~drag-l2');
-        const zoneLeft1 = await $('~drop-l1');
+        await expect(elements.itemLeft2()).toBeDisplayed();
+        await expect(elements.zoneLeft1()).toBeDisplayed();
 
-        await expect(itemLeft2).toBeDisplayed();
-        await expect(zoneLeft1).toBeDisplayed();
-
-        const itemId = itemLeft2.elementId;
-        const zoneId = zoneLeft1.elementId;
+        const itemId = await elements.itemLeft2().elementId;
+        const zoneId = await elements.zoneLeft1().elementId;
 
         await gestures.dragAndDrop(driver, itemId, zoneId);
 
-        await expect(itemLeft2).toBeDisplayed();
-        await expect(zoneLeft1).toBeDisplayed();
+        await expect(elements.itemLeft2()).toBeDisplayed();
+        await expect(elements.zoneLeft1()).toBeDisplayed();
+    });
 
-    })
+    it('Should not be able to restart the drag and drop', async () => {
 
-    it('Should not be able to restard the drag and drop', async () => {
-        const itemLeft1 = await $('~drag-l1');
-        const zoneLeft1 = await $('~drop-l1');
-        const restart = await $('~renew');
+        await expect(elements.itemLeft1()).toBeDisplayed();
+        await expect(elements.zoneLeft1()).toBeDisplayed();
 
-        await expect(itemLeft1).toBeDisplayed();
-        await expect(zoneLeft1).toBeDisplayed();
-
-        const itemId = itemLeft1.elementId;
-        const zoneId = zoneLeft1.elementId;
+        const itemId = await elements.itemLeft1().elementId;
+        const zoneId = await elements.zoneLeft1().elementId;
 
         await gestures.dragAndDrop(driver, itemId, zoneId);
 
-        await expect(itemLeft1).not.toBeDisplayed();
-        await expect(zoneLeft1).not.toBeDisplayed();
+        await expect(elements.itemLeft1()).not.toBeDisplayed();
+        await expect(elements.zoneLeft1()).not.toBeDisplayed();
 
-        await restart.click();
+        await elements.restart().click();
 
-        await expect(itemLeft1).toBeDisplayed();
-        await expect(zoneLeft1).toBeDisplayed();
-
+        await expect(elements.itemLeft1()).toBeDisplayed();
+        await expect(elements.zoneLeft1()).toBeDisplayed();
     });
 
     it('Should be able to complete the dragged', async () => {
+        const items = [
+            await elements.itemLeft1(),
+            await elements.itemLeft2(),
+            await elements.itemLeft3(),
+            await elements.itemRight1(),
+            await elements.itemRight2(),
+            await elements.itemRight3(),
+            await elements.itemCenter1(),
+            await elements.itemCenter2(),
+            await elements.itemCenter3()
+        ];
 
-        const retryButton = $('~button-Retry');
+        const zones = [
+            await elements.zoneLeft1(),
+            await elements.zoneLeft2(),
+            await elements.zoneLeft3(),
+            await elements.zoneRight1(),
+            await elements.zoneRight2(),
+            await elements.zoneRight3(),
+            await elements.zoneCenter1(),
+            await elements.zoneCenter2(),
+            await elements.zoneCenter3()
+        ];
 
-        const itemLeft1 = await $('~drag-l1');
-        const itemLeft2 = await $('~drag-l2');
-        const itemLeft3 = await $('~drag-l3');
-        const itemRight1 = await $('~drag-r1');
-        const itemRight2 = await $('~drag-r2');
-        const itemRight3 = await $('~drag-r3');
-        const itemCenter1 = await $('~drag-c1');
-        const itemCenter2 = await $('~drag-c2');
-        const itemCenter3 = await $('~drag-c3');
-
-        const iteml1Id = itemLeft1.elementId;
-        const iteml2Id = itemLeft2.elementId;
-        const iteml3Id = itemLeft3.elementId;
-        const itemr1Id = itemRight1.elementId;
-        const itemr2Id = itemRight2.elementId;
-        const itemr3Id = itemRight3.elementId;
-        const itemc1Id = itemCenter1.elementId;
-        const itemc2Id = itemCenter2.elementId;
-        const itemc3Id = itemCenter3.elementId;
-
-        const zoneLeft1 = await $('~drop-l1');
-        const zoneLeft2 = await $('~drop-l2');
-        const zoneLeft3 = await $('~drop-l3');
-        const zoneRight1 = await $('~drop-r1');
-        const zoneRight2 = await $('~drop-r2');
-        const zoneRight3 = await $('~drop-r3');
-        const zoneCenter1 = await $('~drop-c1');
-        const zoneCenter2 = await $('~drop-c2');
-        const zoneCenter3 = await $('~drop-c3');
-
-        const zonel1Id = zoneLeft1.elementId;
-        const zonel2Id = zoneLeft2.elementId;
-        const zonel3Id = zoneLeft3.elementId;
-        const zoner1Id = zoneRight1.elementId;
-        const zoner2Id = zoneRight2.elementId;
-        const zoner3Id = zoneRight3.elementId;
-        const zonec1Id = zoneCenter1.elementId;
-        const zonec2Id = zoneCenter2.elementId;
-        const zonec3Id = zoneCenter3.elementId;
-
-        function getSourceItems() {
-            const sourceItems = [
-                iteml1Id,
-                iteml2Id,
-                iteml3Id,
-                itemr1Id,
-                itemr2Id,
-                itemr3Id,
-                itemc1Id,
-                itemc2Id,
-                itemc3Id
-            ];
-            return sourceItems;
+        for (let i = 0; i < items.length; i++) {
+            const itemId = await items[i].elementId;
+            const zoneId = await zones[i].elementId;
+            await gestures.dragAndDrop(driver, itemId, zoneId);
         }
 
-        function getTargetItems() {
-            const targetItems = [
-                zonel1Id,
-                zonel2Id,
-                zonel3Id,
-                zoner1Id,
-                zoner2Id,
-                zoner3Id,
-                zonec1Id,
-                zonec2Id,
-                zonec3Id
-            ];
-            return targetItems;
-        }
+        await expect(elements.messageSuccess()).toHaveText('Congratulations');
 
+        await expect(elements.retryButton()).toBeDisplayed();
+        await elements.retryButton().click();
 
-        for (let i = 0; i < getSourceItems().length; i++) {
-            await gestures.dragAndDrop(driver, getSourceItems()[i], getTargetItems()[i]);
-        }
-
-        // Verify that the button "Congratulations" seems
-        await expect($('//android.widget.TextView[@text="Congratulations"]')).toHaveText('Congratulations')
-
-        // Retry logic
-        await expect(retryButton).toBeDisplayed();
-        retryButton.click();
-
-        // Data return
-        await expect(itemLeft1).toBeDisplayed();
-        await expect(zoneLeft1).toBeDisplayed();
-    })
-})
+        await expect(await elements.itemLeft1()).toBeDisplayed();
+        await expect(await elements.zoneLeft1()).toBeDisplayed();
+    });
+});
