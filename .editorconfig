@@ -1,12 +1,9 @@
-
 root = true
 
-[*]
-
+[{.ts,.js}]
 indent_style = space
-indent_size = 4
-
-sigle_quotes = false
+indent_size = 2
+sigle_quotes = true
 end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true

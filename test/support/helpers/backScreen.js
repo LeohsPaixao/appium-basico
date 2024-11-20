@@ -1,4 +1,12 @@
-const backScreen = async (driver) => {
+/**
+ * Performs a back screen action on the app using Appium driver.
+ * This function simulates a swipe from the center of the screen to the right,
+ * effectively going back to the previous screen.
+ *
+ * @param {import('appium').Driver} driver - The Appium driver instance.
+ * @returns {Promise<void>} A promise that resolves when the back screen action is completed.
+ */
+module.exports.backScreen = async (driver) => {
     await driver.performActions([
         {
             type: 'pointer',
@@ -16,4 +24,3 @@ const backScreen = async (driver) => {
     await driver.pause(2500);
 }
 
-module.exports = { backScreen };

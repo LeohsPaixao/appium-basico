@@ -4,7 +4,13 @@ const elements = new ProductElements();
 
 const getRandomCode = (min = 500, max = 99999) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-const fillProductForm = async () => {
+/**
+* Fills out a product form with predefined values.
+* 
+* @returns {Promise<void>} A promise that resolves when the form is successfully filled.
+* @throws {Error} Throws an error if there is an issue filling the form.
+*/
+module.exports.fillProductForm = async () => {
     const code = getRandomCode().toString();
 
     const formFields = [
@@ -24,5 +30,3 @@ const fillProductForm = async () => {
         throw new Error('Error filling product form:', error);
     }
 };
-
-module.exports = { fillProductForm };

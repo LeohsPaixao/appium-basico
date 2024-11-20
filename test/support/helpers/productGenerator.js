@@ -4,7 +4,14 @@ const ProductElements = require("../../specs/productApp/product/productElements"
 
 const elements = new ProductElements();
 
-const productGenerator = async (amount) => {
+/**
+ * This function generates a specified amount of new products in the application.
+ *
+ * @param {number} amount - The number of products to generate.
+ * @throws Will throw an error if there's an issue with generating the products.
+ * @returns {Promise<void>} - Returns a promise that resolves when all products have been generated.
+ */
+module.exports.productGenerator = async (amount) => {
     try {
         for (let i = 0; i < amount; i++) {
             await elements.btnNewProduct().waitForDisplayed();
@@ -22,5 +29,3 @@ const productGenerator = async (amount) => {
         throw new Error('Error in productGenerator:', error);
     }
 };
-
-module.exports = { productGenerator };
