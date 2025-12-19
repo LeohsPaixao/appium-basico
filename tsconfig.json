@@ -3,6 +3,15 @@
         "moduleResolution": "node",
         "module": "commonjs",
         "target": "es2022",
+        "skipLibCheck": true,
+        "noEmit": true,
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
         "lib": [
             "es2022",
             "dom"
@@ -13,15 +22,6 @@
             "expect-webdriverio",
             "@wdio/mocha-framework"
         ],
-        "skipLibCheck": true,
-        "noEmit": true,
-        "allowImportingTsExtensions": true,
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true
     },
     "include": [
         "test",

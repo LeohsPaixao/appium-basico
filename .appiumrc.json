@@ -11,8 +11,13 @@
         "log-timestamp": false,
         "long-stacktrace": true,
         "no-perms-check": true,
-        "use-drivers": ["uiautomator2"],
-        "use-plugins": ["images", "gestures"],
+        "use-drivers": [
+            "uiautomator2"
+        ],
+        "use-plugins": [
+            "images",
+            "gestures"
+        ],
         "default-capabilities": {
             "platformName": "Android",
             "appium:automationName": "uiautomator2",
