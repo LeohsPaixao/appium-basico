@@ -24,7 +24,8 @@
             "appium:autoGrantPermissions": true,
             "appium:noReset": false,
             "appium:autoLaunch": true,
-            "appium:newCommandTimeout": 3600
+            "appium:newCommandTimeout": 3600,
+            "appium:appWaitDuration": 30000
         }
     }
 }
