@@ -1,5 +1,5 @@
-const gestures = require('../../support/helpers/gestures.js');
-const DraggableElements = require('./dragAnddrop/dragndropElement');
+import { dragAndDrop } from '../../support/helpers/gestures.js';
+import DraggableElements from './dragAnddrop/dragndropElement.js';
 
 const elements = new DraggableElements();
 
@@ -16,7 +16,7 @@ describe('-> dragndrop', () => {
         const itemId = await elements.itemLeft2().elementId;
         const zoneId = await elements.zoneLeft1().elementId;
 
-        await gestures.dragAndDrop(driver, itemId, zoneId);
+        await dragAndDrop(driver, itemId, zoneId);
 
         await expect(elements.itemLeft2()).toBeDisplayed();
         await expect(elements.zoneLeft1()).toBeDisplayed();
@@ -30,7 +30,7 @@ describe('-> dragndrop', () => {
         const itemId = await elements.itemLeft1().elementId;
         const zoneId = await elements.zoneLeft1().elementId;
 
-        await gestures.dragAndDrop(driver, itemId, zoneId);
+        await dragAndDrop(driver, itemId, zoneId);
 
         await expect(elements.itemLeft1()).not.toBeDisplayed();
         await expect(elements.zoneLeft1()).not.toBeDisplayed();
@@ -69,7 +69,7 @@ describe('-> dragndrop', () => {
         for (let i = 0; i < items.length; i++) {
             const itemId = await items[i].elementId;
             const zoneId = await zones[i].elementId;
-            await gestures.dragAndDrop(driver, itemId, zoneId);
+            await dragAndDrop(driver, itemId, zoneId);
         }
 
         await expect(elements.messageSuccess()).toHaveText('Congratulations');

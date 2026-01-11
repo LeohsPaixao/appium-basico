@@ -7,7 +7,7 @@
  *
  * @returns {Promise<void>} A promise that resolves when the drag and drop operation is completed.
  */
-async function dragAndDrop(driver, sourceId, destinationId) {
+export async function dragAndDrop(driver: WebdriverIO.Browser, sourceId: string, destinationId: string) {
     await driver.executeScript('gesture: dragAndDrop', [{ sourceId, destinationId }]);
 }
 
@@ -21,14 +21,14 @@ async function dragAndDrop(driver, sourceId, destinationId) {
  *
  * @returns {Promise<void>} A promise that resolves when the swipe operation is completed.
  */
-async function swipeElement(driver, element, direction, percentage) {
+export async function swipeElement(driver: WebdriverIO.Browser, element: WebdriverIO.Element, direction: string, percentage: number) {
     const elementId = await element.elementId;
 
-        await driver.executeScript('gesture: swipe', [{
-            elementId,
-            percentage,
-            direction,
-        }]
+    await driver.executeScript('gesture: swipe', [{
+        elementId,
+        percentage,
+        direction,
+    }]
     );
 }
 
@@ -45,15 +45,15 @@ async function swipeElement(driver, element, direction, percentage) {
  *
  * @returns {Promise<void>} A promise that resolves when the scroll operation is completed or when the target element is found.
  */
-async function scrollIntoView(driver, scrollableView, selector, strategy, percentage, direction, maxCount) {
+export async function scrollIntoView(driver: WebdriverIO.Browser, scrollableView: string, selector: string, strategy: string, percentage: number, direction: string, maxCount: number) {
     await driver.executeScript('gesture: scrollElementIntoView', [{
-            scrollableView,
-            selector,
-            strategy,
-            percentage,
-            direction,
-            maxCount,
-        }]
+        scrollableView,
+        selector,
+        strategy,
+        percentage,
+        direction,
+        maxCount,
+    }]
     );
 }
 
@@ -68,7 +68,7 @@ async function scrollIntoView(driver, scrollableView, selector, strategy, percen
  *
  * @returns {Promise<void>} A promise that resolves when the swipe operation is completed.
  */
-async function performSwipe(driver, startX, startY, endX, endY) {
+export async function performSwipe(driver: WebdriverIO.Browser, startX: number, startY: number, endX: number, endY: number) {
     await driver.performActions([
         {
             type: 'pointer',
@@ -94,12 +94,12 @@ async function performSwipe(driver, startX, startY, endX, endY) {
  *
  * @returns {Promise<void>} A promise that resolves when the double tap operation is completed.
  */
-async function doubleTap(driver, element) {
+export async function doubleTap(driver: WebdriverIO.Browser, element: WebdriverIO.Element) {
     const elementId = await element.elementId;
 
-        await driver.executeScript('gesture: doubleTap', [{
-            elementId
-        }]
+    await driver.executeScript('gesture: doubleTap', [{
+        elementId
+    }]
     );
 }
 
@@ -113,7 +113,7 @@ async function doubleTap(driver, element) {
  *
  * @returns {Promise<void>} A promise that resolves when the long press operation is completed.
  */
-async function longPress(driver, element, pressure, duration) {
+export async function longPress(driver: WebdriverIO.Browser, element: WebdriverIO.Element, pressure: number, duration: number) {
     const elementId = await element.elementId;
 
     await driver.executeScript('gesture: longPress', [{
@@ -122,12 +122,3 @@ async function longPress(driver, element, pressure, duration) {
         duration,
     }]);
 }
-
-module.exports = {
-    dragAndDrop,
-    swipeElement,
-    scrollIntoView,
-    performSwipe,
-    doubleTap,
-    longPress,
-};

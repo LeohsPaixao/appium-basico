@@ -1,4 +1,4 @@
-class DraggableElements {
+export default class DraggableElements {
   dragndropPage = () => $('~Drag');
   dragndropScreen = () => $('~Drag-drop-screen');
   retryButton = () => $('~button-Retry');
@@ -23,5 +23,3 @@ class DraggableElements {
   zoneCenter3 = () => $('~drop-c3');
   messageSuccess = () => $('//android.widget.TextView[@text="Congratulations"]')
 }
-
-module.exports = DraggableElements;
