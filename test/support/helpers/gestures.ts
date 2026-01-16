@@ -1,7 +1,7 @@
 /**
  * Performs a drag and drop gesture on the app using Appium's executeScript method.
  *
- * @param {import('appium').Driver} driver - The Appium driver instance.
+ * @param {WebdriverIO.Browser} driver - The WebdriverIO browser instance.
  * @param {string} sourceId - The element id to start the drag from.
  * @param {string} destinationId - The element id to drop the dragged element onto.
  *
@@ -14,14 +14,14 @@ export async function dragAndDrop(driver: WebdriverIO.Browser, sourceId: string,
 /**
  * Performs a swipe gesture on a specific element using Appium's executeScript method.
  *
- * @param {import('appium').Driver} driver - The Appium driver instance.
- * @param {import('appium').WebElement} element - The element to perform the swipe gesture on.
+ * @param {WebdriverIO.Browser} driver - The WebdriverIO browser instance.
+ * @param {WebdriverIO.Element | { elementId: Promise<string> | string }} element - The element to perform the swipe gesture on.
  * @param {string} direction - The direction of the swipe gesture. It can be 'up', 'down', 'left', or 'right'.
  * @param {number} percentage - The percentage of the screen to swipe. For example, 0.5 would result in a half-screen swipe.
  *
  * @returns {Promise<void>} A promise that resolves when the swipe operation is completed.
  */
-export async function swipeElement(driver: WebdriverIO.Browser, element: WebdriverIO.Element, direction: string, percentage: number) {
+export async function swipeElement(driver: WebdriverIO.Browser, element: WebdriverIO.Element | { elementId: Promise<string> | string }, direction: string, percentage: number) {
     const elementId = await element.elementId;
 
     await driver.executeScript('gesture: swipe', [{
@@ -35,7 +35,7 @@ export async function swipeElement(driver: WebdriverIO.Browser, element: Webdriv
 /**
  * Performs a scroll gesture to bring a specific element into view within a scrollable view.
  *
- * @param {import('appium').Driver} driver - The Appium driver instance.
+ * @param {WebdriverIO.Browser} driver - The WebdriverIO browser instance.
  * @param {string} scrollableView - The id of the scrollable view element.
  * @param {string} selector - The selector to identify the target element within the scrollable view.
  * @param {string} strategy - The strategy to use for locating the target element. It can be 'id', 'class name', 'accessibility id', etc.
@@ -60,7 +60,7 @@ export async function scrollIntoView(driver: WebdriverIO.Browser, scrollableView
 /**
  * Performs a swipe gesture on the screen using Appium's performActions method.
  *
- * @param {import('appium').Driver} driver - The Appium driver instance.
+ * @param {WebdriverIO.Browser} driver - The WebdriverIO browser instance.
  * @param {number} startX - The initial x-coordinate of the swipe gesture.
  * @param {number} startY - The initial y-coordinate of the swipe gesture.
  * @param {number} endX - The final x-coordinate of the swipe gesture.
@@ -89,8 +89,8 @@ export async function performSwipe(driver: WebdriverIO.Browser, startX: number, 
 /**
  * Performs a double tap gesture on a specific element using Appium's executeScript method.
  *
- * @param {import('appium').Driver} driver - The Appium driver instance.
- * @param {import('appium').WebElement} element - The element to perform the double tap gesture on.
+ * @param {WebdriverIO.Browser} driver - The WebdriverIO browser instance.
+ * @param {WebdriverIO.Element} element - The element to perform the double tap gesture on.
  *
  * @returns {Promise<void>} A promise that resolves when the double tap operation is completed.
  */
@@ -106,8 +106,8 @@ export async function doubleTap(driver: WebdriverIO.Browser, element: WebdriverI
 /**
  * Performs a long press gesture on a specific element using Appium's executeScript method.
  *
- * @param {import('appium').Driver} driver - The Appium driver instance.
- * @param {import('appium').WebElement} element - The element to perform the long press gesture on.
+ * @param {WebdriverIO.Browser} driver - The WebdriverIO browser instance.
+ * @param {WebdriverIO.Element} element - The element to perform the long press gesture on.
  * @param {number} pressure - The pressure to apply during the long press gesture.
  * @param {number} duration - The duration of the long press gesture in milliseconds.
  *
