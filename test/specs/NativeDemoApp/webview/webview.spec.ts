@@ -7,7 +7,7 @@ describe("-> Webview", () => {
 
     it("Should be able to navigate to Get Started and return", async () => {
         await method.navigateToGetStarted();
-        await method.validateBreadcrumbs();
+        await method.validateGetStartedScreen();
         await method.navigateToHome();
         await method.validateHomeScreen();
     });
