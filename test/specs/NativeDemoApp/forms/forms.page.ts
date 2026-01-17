@@ -13,7 +13,7 @@ export default class FormsElements {
     buttonActive: () => $('~button-Active'),
     buttonInactive: () => $('~button-Inactive'),
     messageButtonClick: () => $('//android.widget.TextView[@resource-id="android:id/message"]'),
-  }
+  };
 
   async visit() {
     await this.elements.formPage().click();

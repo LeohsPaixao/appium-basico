@@ -10,7 +10,7 @@ export default class SignupElements {
     messageInvalidPassword: () => $('//android.widget.TextView[@text="Please enter at least 8 characters"]'),
     messageSamePassword: () => $('//android.widget.TextView[@text="Please enter the same password"]'),
     messageSignupSucceeded: () => $('//android.widget.TextView[@resource-id="android:id/message"]'),
-  }
+  };
 
   async fillSignUpForm(email: string, password: string, repeatPassword: string) {
     await this.elements.fieldEmail().addValue(email);

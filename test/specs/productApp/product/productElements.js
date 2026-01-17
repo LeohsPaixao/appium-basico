@@ -15,20 +15,20 @@ class ProductElements {
   btnOkIframeDate = () => $('[text="OK"]');
   tableProduct = () => $('id=br.com.pztec.estoque:id/tabela_itens');
   btnRemoveProduct = () => $('id=br.com.pztec.estoque:id/deletar');
-  btnEditProduct = () => $("id=br.com.pztec.estoque:id/editar");
+  btnEditProduct = () => $('id=br.com.pztec.estoque:id/editar');
   btnIncreaseQtnProduct = () => $('id=br.com.pztec.estoque:id/entrada');
   btnDecreaseQtnProduct = () => $('id=br.com.pztec.estoque:id/saida');
   titleScreenQtnProduct = () => $('id=br.com.pztec.estoque:id/lbl_titulo');
-  btnSaveQtnProduct = () => $("id=br.com.pztec.estoque:id/btn_salvar");
-  modalMessage = () => $("id=android:id/alertTitle");
+  btnSaveQtnProduct = () => $('id=br.com.pztec.estoque:id/btn_salvar');
+  modalMessage = () => $('id=android:id/alertTitle');
   modalBtnYes = () => $('id=android:id/button1');
-  inputQtnEntrance = () => $("id=br.com.pztec.estoque:id/txt_qtdentrada");
-  prodId = () => $("id=br.com.pztec.estoque:id/txt_idprod");
-  inputQtnOut = () => $("id=br.com.pztec.estoque:id/txt_qtdsaida");
-  inputReason = () => $("id=br.com.pztec.estoque:id/txt_motivo");
-  inputRef = () => $("id=br.com.pztec.estoque:id/txt_referencia");
-  btnSearch = () => $("~Search");
-  inputSearch = () => $("id=android:id/search_src_text");
+  inputQtnEntrance = () => $('id=br.com.pztec.estoque:id/txt_qtdentrada');
+  prodId = () => $('id=br.com.pztec.estoque:id/txt_idprod');
+  inputQtnOut = () => $('id=br.com.pztec.estoque:id/txt_qtdsaida');
+  inputReason = () => $('id=br.com.pztec.estoque:id/txt_motivo');
+  inputRef = () => $('id=br.com.pztec.estoque:id/txt_referencia');
+  btnSearch = () => $('~Search');
+  inputSearch = () => $('id=android:id/search_src_text');
 }
 
 module.exports = ProductElements;

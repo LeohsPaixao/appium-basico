@@ -12,7 +12,7 @@ export default class LoginElements {
     messageSamePassword: () => $('//android.widget.TextView[@text="Please enter the same password"]'),
     messageSignupSucceeded: () => $('//android.widget.TextView[@resource-id="android:id/message"]'),
     messageLoginSucceeded: () => $('//android.widget.TextView[@resource-id="android:id/message"]'),
-  }
+  };
 
   async fillSignUpForm(email: string, password: string, repeatPassword: string) {
     await this.elements.fieldEmail().addValue(email);
@@ -45,7 +45,7 @@ export default class LoginElements {
   async validateInvalidEmailMessage() {
     await expect(this.elements.messageInvalidEmail()).toHaveText('Please enter a valid email address');
   }
-  
+
   async validateInvalidPasswordMessage() {
     await expect(this.elements.messageInvalidPassword()).toHaveText('Please enter at least 8 characters');
   }

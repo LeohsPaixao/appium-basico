@@ -1,31 +1,26 @@
 {
-    "server": {
-        "address": "127.0.0.1",
-        "port": 4723,
-        "allow-cors": true,
-        "keep-alive-timeout": 600,
-        "debug-log-spacing": true,
-        "local-timezone": true,
-        "log-level": "info",
-        "log-no-colors": false,
-        "log-timestamp": false,
-        "long-stacktrace": true,
-        "no-perms-check": true,
-        "use-drivers": [
-            "uiautomator2"
-        ],
-        "use-plugins": [
-            "images",
-            "gestures"
-        ],
-        "default-capabilities": {
-            "platformName": "Android",
-            "appium:automationName": "uiautomator2",
-            "appium:autoGrantPermissions": true,
-            "appium:noReset": false,
-            "appium:autoLaunch": true,
-            "appium:newCommandTimeout": 3600,
-            "appium:appWaitDuration": 30000
-        }
+  "server": {
+    "address": "127.0.0.1",
+    "port": 4723,
+    "allow-cors": true,
+    "keep-alive-timeout": 600,
+    "debug-log-spacing": true,
+    "local-timezone": true,
+    "log-level": "info",
+    "log-no-colors": false,
+    "log-timestamp": false,
+    "long-stacktrace": true,
+    "no-perms-check": true,
+    "use-drivers": ["uiautomator2"],
+    "use-plugins": ["images", "gestures"],
+    "default-capabilities": {
+      "platformName": "Android",
+      "appium:automationName": "uiautomator2",
+      "appium:autoGrantPermissions": true,
+      "appium:noReset": false,
+      "appium:autoLaunch": true,
+      "appium:newCommandTimeout": 3600,
+      "appium:appWaitDuration": 30000
     }
+  }
 }

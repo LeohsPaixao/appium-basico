@@ -13,9 +13,11 @@
     "test:demoapp": "NODE_OPTIONS=\"--import tsx\" APP_ENV=demoapp rimraf allure-results && npx wdio run wdio.conf.ts",
     "test:demoapp:spec": "NODE_OPTIONS=\"--import tsx\" APP_ENV=demoapp rimraf allure-results && npx wdio run wdio.conf.ts --spec",
     "test:productapp": "NODE_OPTIONS=\"--import tsx\" APP_ENV=productapp rimraf allure-results && npx wdio run wdio.conf.ts",
+    "wdio": "NODE_OPTIONS=\"--import tsx\" rimraf allure-results && wdio run wdio.conf.ts",
     "relatory": "allure generate allure-results --clean",
     "relatory:open": "allure open",
-    "wdio": "NODE_OPTIONS=\"--import tsx\" rimraf allure-results && wdio run wdio.conf.ts"
+    "lint": "eslint test/**/*.{js,ts} --fix",
+    "format": "prettier --write test/**/*.{js,ts}"
   },
   "keywords": [
     "appium",
@@ -30,6 +32,7 @@
   },
   "devDependencies": {
     "@appium/images-plugin": "4.0.4",
+    "@eslint/js": "9.39.2",
     "@types/node": "22.10.0",
     "@typescript-eslint/eslint-plugin": "8.18.2",
     "@typescript-eslint/parser": "8.18.2",
@@ -48,11 +51,13 @@
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-prettier": "5.5.4",
     "expect-webdriverio": "5.5.0",
+    "globals": "17.0.0",
+    "jiti": "2.6.1",
     "lodash": "4.17.21",
     "prettier": "3.7.4",
+    "rimraf": "6.1.2",
     "tsx": "4.21.0",
     "typescript": "5.7.3",
-    "typescript-eslint": "8.18.2",
-    "rimraf": "6.1.2"
+    "typescript-eslint": "^8.53.0"
   }
 }

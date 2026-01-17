@@ -11,4 +11,5 @@ tmp
 # Ignorar  Condiguração do VSCode User
 .vscode
 
+# Ignorar arquivo .env
 .env

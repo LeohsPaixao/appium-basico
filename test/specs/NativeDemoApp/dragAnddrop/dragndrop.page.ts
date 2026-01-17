@@ -31,8 +31,8 @@ export default class DraggableElements {
     zoneCenter2: () => $('~drop-c2'),
     zoneCenter3: () => $('~drop-c3'),
 
-    messageSuccess: () => $('//android.widget.TextView[@text="Congratulations"]')
-  }
+    messageSuccess: () => $('//android.widget.TextView[@text="Congratulations"]'),
+  };
 
   async visit() {
     await this.elements.dragndropPage().click();
@@ -82,7 +82,7 @@ export default class DraggableElements {
       this.elements.itemRight3(),
       this.elements.itemCenter1(),
       this.elements.itemCenter2(),
-      this.elements.itemCenter3()
+      this.elements.itemCenter3(),
     ];
 
     const zones = [
@@ -94,7 +94,7 @@ export default class DraggableElements {
       this.elements.zoneRight3(),
       this.elements.zoneCenter1(),
       this.elements.zoneCenter2(),
-      this.elements.zoneCenter3()
+      this.elements.zoneCenter3(),
     ];
 
     for (let i = 0; i < items.length; i++) {
